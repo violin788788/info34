@@ -39,14 +39,11 @@
 {% endfor %}
 
 
-<!--
-<iframe src="https://rumble.com/embed/v5xwnen/?pub=4" width="640" height="360" frameborder="0" allowfullscreen></iframe>
--->
-
+<div id="tradingview_abc123" style="height:400px;"></div>
 
         <iframe
       src="https://www.tradingview.com/widgetembed/?symbol=AMEX:SPY&interval=1&theme=light&style=1&locale=en"
-      width="350"
+      width="375"
       height="300"
       frameborder="0"
       allowtransparency="true"
@@ -55,12 +52,16 @@
 
         <iframe
       src="https://www.tradingview.com/widgetembed/?symbol=AMEX:USO&interval=1&theme=light&style=1&locale=en"
-      width="350"
+      width="375"
       height="300"
       frameborder="0"
       allowtransparency="true"
       scrolling="no">
         </iframe>
+
+
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<div class="tradingview-widget-container">
 
 
     <div id="div_select_channel">
@@ -71,25 +72,9 @@
 <div id="show_channel"></div>
 
 
-<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-<div class="tradingview-widget-container">
-
-
-<div id="tradingview_abc123" style="height:400px;"></div>
-
 
 
     <h2>Generate TradingView Options URL</h2>
-
-    <!-- Input fields for symbol, strike price, call/put, and expiration date
-
-    https://www.tradingview.com/chart/?symbol=OPRA%3Auso260107c69.0
-
-    https://www.tradingview.com/chart/?symbol=OPRA%3ASPY260106C690.0
-
-    -->
-
-
     <input type="text" id="symbol" placeholder="symbol" onchange="generateURL()">
     <input type="number" id="strike-price" placeholder="strike-price" onchange="generateURL()">
     <select id="call-put" onchange="generateURL()">
@@ -236,8 +221,8 @@ used stuff
             if (selectedChannelURL !== 'pick?') {
                 const iframe = document.createElement('iframe');
                 iframe.src = selectedChannelURL;
-                iframe.width = "560";
-                iframe.height = "315";
+                iframe.width = "750";
+                iframe.height = "500";
                 iframe.frameBorder = "0";
                 iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
                 iframe.allowFullscreen = true;
@@ -250,8 +235,11 @@ used stuff
 //channels
 const channels = [                // Placeholder
     ["Pick","Pick"],
+    ["Fox", "https://www.youtube.com/embed/d2Pwc_NVWzE"],
     ["Newsmax2", "https://rumble.com/embed/v5xwnen/?pub=4"],
     ["Bannon", "https://rumble.com/embed/v6jth3u/?pub=4"],
+    ["Bloomberg","https://www.youtube.com/embed/iEpJwprxDdk"],
+
 ];
 
 //newsmax <iframe class="rumble" width="640" height="360" src="https://rumble.com/embed/v5xwnen/?pub=4" frameborder="0" allowfullscreen></iframe>
