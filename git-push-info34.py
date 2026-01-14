@@ -1,6 +1,8 @@
-
-
-import os,subprocess
+import os,subprocess,sys
+cwd = os.getcwd()
+directory_name = os.path.basename(cwd)
+print(directory_name)
+print(cwd)
 
 
 #"git push origin main --force"
@@ -8,19 +10,18 @@ import os,subprocess
 # Define the Git commands
 commands = [
     "git add -A",
-    'git commit -m "Remove unwanted files and directories, and add/modify other changes"'
+    'git commit -m "update/create/delete files+folders"'
 ]
 
 # Execute the commands in the shell using os.system()
 for command in commands:
     os.system(command)
 
-
 # Step 1: Read the token from the token.txt file
 with open('token.txt', 'r') as file:
     token = file.read().strip()  # Read the token and remove any extra whitespace
 # Step 2: Set up the GitHub repository URL with the token for authentication
-repo_url = f"https://{token}@github.com/violin788788/info34.git"
+repo_url = f"https://{token}@github.com/violin788788/"+directory_name+".git"
 
 # Step 3: Execute the Git command (force push)
 try:
@@ -30,8 +31,12 @@ try:
 except subprocess.CalledProcessError as e:
     print(f"Error occurred: {e}")
 
+url = r"https://github.com/violin788788/"+directory_name
+chrome_path = r"A:\Program Files\Google\Chrome\Application\chrome.exe"
+subprocess.run([chrome_path, "--incognito", url])
 
-    """
+
+"""
 create git
 git init
 
@@ -39,7 +44,7 @@ create main branch
 git checkout -b main
 
 add remote
-git remote add origin https://github.com/violin788788/info34.git
+git remote add origin https://github.com/violin788788/"+directory_name+".git"
 
 stage all changes
 git add -A
