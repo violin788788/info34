@@ -15,6 +15,7 @@ virtualenv/
 .local/
 .virtualenvs/
 token/
+trading/
 
 # Ignore sensitive files (e.g., tokens, credentials)
 token.txt
