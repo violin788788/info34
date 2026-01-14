@@ -1,8 +1,16 @@
-import os,subprocess,sys
+import os,subprocess,sys,platform
 cwd = os.getcwd()
 directory_name = os.path.basename(cwd)
 print(directory_name)
 print(cwd)
+system_type = platform.system()
+print(type(system_type))
+print(system_type)
+if "Linux" in system_type:
+    print("do not open chrome")
+
+#print system type
+
 
 
 #"git push origin main --force"
@@ -30,6 +38,12 @@ try:
     print("Force push to GitHub was successful!")
 except subprocess.CalledProcessError as e:
     print(f"Error occurred: {e}")
+
+sys.exit()
+
+if "Linux" in system_type:
+    print("do not open chrome")
+    sys.exit()
 
 url = r"https://github.com/violin788788/"+directory_name
 chrome_path = r"A:\Program Files\Google\Chrome\Application\chrome.exe"
