@@ -156,6 +156,14 @@ style="height: 80px;">
 -->
 
 
+<form method="post" enctype="multipart/form-data">
+<input type="file" name="file" accept=".mp3" required>
+<button type="submit">mp3</button>
+</form>
+
+<br><br>
+
+
 <input type="text" id="text_to_translate" placeholder="Enter text">
 <button id="translate-btn" onclick="getTranslation()">Translate</button>
 <div id="translation-result"></div>
@@ -250,7 +258,23 @@ used stuff
 <script>
 
 
+//server_return("text_to_translate","/translate","translation-result"){
+function server_return(id_get,route,id_change){
+
+    const text=document.getElementById(id_get).value;
+    const lang="fr";
+    //route = for ex "/translate"
+    fetch(route,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:text,lang:lang})})
+    .then(response=>response.json())
+    .then(data=>{document.getElementById(id_change).innerText=data.translation;})
+    .catch(err=>console.error(err));
+
+}
+
+
 function getTranslation(){
+
+
     const text=document.getElementById("text_to_translate").value;
     const lang="fr";
     fetch("/translate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:text,lang:lang})})
@@ -282,7 +306,7 @@ function getTranslation(){
 
 //channels
 const channels = [                // Placeholder
-    ["Pick","Pick"],
+    ["Youtube/Rumble Live","Youtube/Rumble Live"],
     ["Fox", "https://www.youtube.com/embed/d2Pwc_NVWzE"],
     ["Newsmax2", "https://rumble.com/embed/v5xwnen/?pub=4"],
     ["Bannon", "https://rumble.com/embed/v6jth3u/?pub=4"],
@@ -290,12 +314,11 @@ const channels = [                // Placeholder
     ["GBNews","https://www.youtube.com/embed/ZAJk8gdFKqs"],
     ["France24","https://www.youtube.com/embed/l8PMl7tUDIE"],
     ["wiedel interviews","https://www.youtube.com/embed/RJ0l7oX3968?list=PLGhS9sd6B4mQClc5cwz0wnUD6lV_kV84H"],
-    ["Deutsche Welt","https://www.youtube.com/embed/lki2m-d-r9Y"],
+    ["welt","https://www.youtube.com/embed/42KoZwptWjw"],
     ["german fernsehen","https://www.youtube.com/embed/OoeHvQ1XkcY"],
 
 
 ];
-
 
 
 

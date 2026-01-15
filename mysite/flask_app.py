@@ -1,25 +1,48 @@
 
 
-"""
-meow
+import os
+from flask import Flask,render_template,request,redirect,url_for
+from werkzeug.utils import secure_filename
+app=Flask(__name__)
+MP3S_FOLDER=os.path.join(os.path.dirname(__file__),'static','mp3s')
+ALLOWED_EXTENSIONS={'mp3'}
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.',1)[1].lower() in ALLOWED_EXTENSIONS
+@app.route('/',methods=['GET','POST'])
+def index():
+    if request.method=='POST':
+        if 'file' in request.files:
+            file=request.files['file']
+            if file.filename!='' and allowed_file(file.filename):
+                filename=secure_filename(file.filename)
+                file.save(os.path.join(MP3S_FOLDER,filename))
+                return redirect(url_for('index'))
+    files=[f for f in os.listdir(MP3S_FOLDER) if f.endswith('.mp3')]
+    return render_template('info34.html',files=files)
+
+
+
+
+
 """
 
 
+import os
 
 
 from flask import Flask, render_template
 app=Flask(__name__)
-#MP3S_FOLDER=os.path.join(os.path.dirname(__file__),'static','mp3s')
+MP3S_FOLDER=os.path.join(os.path.dirname(__file__),'static','mp3s')
 @app.route('/')
 def index():
-    #files=[f for f in os.listdir(MP3S_FOLDER) if f.endswith('.mp3')]
-    return render_template('info34.html')
+    files=[f for f in os.listdir(MP3S_FOLDER) if f.endswith('.mp3')]
+    return render_template('info34.html',files=files)
 
 
 
 
 
-"""
+
 import os
 from flask import Flask, request, render_template, jsonify
 app=Flask(__name__)
