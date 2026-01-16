@@ -24,12 +24,28 @@ def index():
 
 
 import os,platform,sys
+
 from flask import Flask,render_template,request,redirect,url_for
 from werkzeug.utils import secure_filename
+#copy from trading into the info34 flask app directory
+
+# Define source file and destination directory
+#source_file = 'path/to/source/file.txt'
+#destination_dir = 'path/to/destination/directory/'
+
+# Copy the file to the destination directory
+#shutil.copy(source_file, destination_dir)
+
+#print("File copied successfully!")
+
+
+
+
 os_name = platform.system()
 app = Flask(__name__)
 MP3S_FOLDER = os.path.join(os.path.dirname(__file__), 'static', 'mp3s')
 EARNINGS_FILE = os.path.join(os.path.dirname(__file__), 'static', 'earn_dates.txt')
+#EARNINGS_FILE = os.path.join(os.path.dirname(__file__),'earn_dates.txt')
 ALLOWED_EXTENSIONS = {'mp3'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

@@ -500,7 +500,7 @@ let content = ""; // Start with an empty string for content
 
 login_infos.forEach(p => {
     content += `<div style="width:100%;white-space:nowrap;font-family:monospace;margin:8px 0">
-                    ${p[0]} <button onclick="navigator.clipboard.writeText('${p[0]}')">Copy User</button> 
+                    ${p[0]} <button onclick="navigator.clipboard.writeText('${p[0]}')">Copy User</button>
                     ${p[1]} <button onclick="navigator.clipboard.writeText('${p[1]}')">Copy Pass</button>
                 </div>`;
 });
