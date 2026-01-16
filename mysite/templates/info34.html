@@ -477,6 +477,40 @@ const subreddits = [
     "legaladviceofftopic",
     "history"
 ];
+
+
+
+
+
+const login_infos = [
+    ["violin788788@gmail.com", "Viovio1!"],
+    ["34ballotmeasure", "votevote"],
+    ["coffee1655", "espresso556"],
+    ["violin788788@gmail.com", "Viovio3#"],
+    ["violin788788@outlook.com", "Viovio1!"],
+    ["media788788@gmail.com", "Medmed2@"],
+    ["violin78@protonmail.com", "Viovio2@"],
+    ["violin788788@proton.me", "Viovio1!"],
+    ["info34", "Infinf1!"],
+    ["vote34", "Viovio1!"],
+];
+
+const logDiv = document.getElementById("log_infos"); // Get the div with id "log_infos"
+let content = ""; // Start with an empty string for content
+
+login_infos.forEach(p => {
+    content += `<div style="width:100%;white-space:nowrap;font-family:monospace;margin:8px 0">
+                    ${p[0]} <button onclick="navigator.clipboard.writeText('${p[0]}')">Copy User</button> 
+                    ${p[1]} <button onclick="navigator.clipboard.writeText('${p[1]}')">Copy Pass</button>
+                </div>`;
+});
+content+="<br><br>"
+logDiv.innerHTML = content; // Set the innerHTML of the div to the generated content
+
+
+
+
+/*
 const login_infos = [
     ["violin788788@gmail.com", "Viovio1!"],
     ["34ballotmeasure", "votevote"],
@@ -491,6 +525,12 @@ const login_infos = [
 ];
 
 
+login_infos.forEach(p=>document.write(`<div style="width:100%;white-space:nowrap;font-family:monospace;margin:8px 0">${p[0]} <button onclick="navigator.clipboard.writeText('${p[0]}')">Copy User</button>      ${p[1]} <button onclick="navigator.clipboard.writeText('${p[1]}')">Copy Pass</button></div>`));
+*/
+
+
+
+
 /*
 //<div id="log_infos"></div>
 
@@ -500,10 +540,6 @@ login_infos.forEach(log_stuff = log_stuff+`<div style="width:100%;white-space:no
 document.getElementById('log_infos').innerHTML = log_stuff;
 */
 
-
-
-
-login_infos.forEach(p=>document.write(`<div style="width:100%;white-space:nowrap;font-family:monospace;margin:8px 0">${p[0]} <button onclick="navigator.clipboard.writeText('${p[0]}')">Copy User</button>      ${p[1]} <button onclick="navigator.clipboard.writeText('${p[1]}')">Copy Pass</button></div>`));
 
 
 const data_search = [
