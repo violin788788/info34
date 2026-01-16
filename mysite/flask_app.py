@@ -1,8 +1,9 @@
 
 
-import os
+import os,platform
 from flask import Flask,render_template,request,redirect,url_for
 from werkzeug.utils import secure_filename
+os_name = platform.system()
 app=Flask(__name__)
 MP3S_FOLDER=os.path.join(os.path.dirname(__file__),'static','mp3s')
 ALLOWED_EXTENSIONS={'mp3'}
@@ -28,10 +29,10 @@ def index():
     files=[f for f in os.listdir(MP3S_FOLDER) if f.endswith('.mp3')]
     return render_template('info34.html',files=files)
 
-os.startfile("http://127.0.0.1:5000/trading")
-
-if __name__ == '__main__':
-    app.run()
+if "Windows" in os_name:
+    os.startfile("http://127.0.0.1:5000/trading")
+    if __name__ == '__main__':
+        app.run()
 
 
 #http://127.0.0.1:5000/trading
