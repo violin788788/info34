@@ -252,16 +252,34 @@ used stuff
 </select>
 
 
-
+<div id="earnings-dates"></div>
 
 </body>
 
 
-
 <script>
+
+// Fetch the earn_dates.txt file from the static folder
+fetch('{{ url_for('static', filename='earn_dates.txt') }}')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch file');
+        }
+        return response.text();  // Parse the file content as text
+    })
+    .then(data => {
+        // Display the contents of the text file, line by line
+        document.getElementById('earnings-dates').innerHTML = data.replace(/\n/g, '<br>');
+    })
+    .catch(error => {
+        console.error('Error loading file:', error);
+        document.getElementById('earnings-dates').innerHTML = 'Failed to load earnings dates.';
+    });
+
 
 
 //server_return("text_to_translate","/translate","translation-result"){
+/*
 function server_return(id_get,route,id_change){
 
     const text=document.getElementById(id_get).value;
@@ -273,7 +291,7 @@ function server_return(id_get,route,id_change){
     .catch(err=>console.error(err));
 
 }
-
+*/
 
 function getTranslation(){
 
@@ -673,5 +691,8 @@ brands_coq10.forEach(item => {
     li.innerHTML = `<a href="${url}" target="_blank">${item}</a>`;
     list_coq10_best_offer.appendChild(li);
 });
+
+
+
 </script>
 </html>
