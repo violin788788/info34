@@ -8,6 +8,14 @@ MP3S_FOLDER=os.path.join(os.path.dirname(__file__),'static','mp3s')
 ALLOWED_EXTENSIONS={'mp3'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.',1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/trading')
+def trading_page():
+    with open('earn_dates.txt', 'r') as file:
+        file_content = file.read()
+    return f"<pre>{file_content}</pre>"
+
+
 @app.route('/',methods=['GET','POST'])
 def index():
     if request.method=='POST':
@@ -20,8 +28,13 @@ def index():
     files=[f for f in os.listdir(MP3S_FOLDER) if f.endswith('.mp3')]
     return render_template('info34.html',files=files)
 
+os.startfile("http://127.0.0.1:5000/trading")
+
+if __name__ == '__main__':
+    app.run()
 
 
+#http://127.0.0.1:5000/trading
 
 
 """
