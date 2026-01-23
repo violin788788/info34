@@ -9,20 +9,31 @@ print(system_type)
 if "Linux" in system_type:
     print("do not open chrome")
 
+#print system type
+
+
+
+#"git push origin main --force"
+
+# Define the Git commands
 commands = [
     "git add -A",
     'git commit -m "update/create/delete files+folders"'
 ]
 
+# Execute the commands in the shell using os.system()
 for command in commands:
     os.system(command)
 
+# Step 1: Read the token from the token.txt file
 with open('token.txt', 'r') as file:
     token = file.read().strip()  # Read the token and remove any extra whitespace
 # Step 2: Set up the GitHub repository URL with the token for authentication
 repo_url = f"https://{token}@github.com/violin788788/"+directory_name+".git"
 
+# Step 3: Execute the Git command (force push)
 try:
+    # Run the git push command with the token for authentication
     subprocess.run(["git", "push", repo_url, "main", "--force"], check=True)
     print("Force push to GitHub was successful!")
 except subprocess.CalledProcessError as e:
