@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+
+
+    <div id="div_select_channel">
+        <select id="channelDropdown" onchange="changeChannel()">
+            <!-- Options will be added dynamically -->
+        </select>
+    </div>
+
+
+
+<div id="show_channel"></div>
+
+
+
+<script>
+
+
+
+//channels
+const channels = [                // Placeholder
+    ["Youtube/Rumble Live","Youtube/Rumble Live"],
+    ["Fox", "https://www.youtube.com/embed/d2Pwc_NVWzE"],
+    ["Newsmax2", "https://rumble.com/embed/v5xwnen/?pub=4"],
+    ["Bannon", "https://rumble.com/embed/v6jth3u/?pub=4"],
+    ["Bloomberg","https://www.youtube.com/embed/iEpJwprxDdk"],
+    ["GBNews","https://www.youtube.com/embed/ZAJk8gdFKqs"],
+    ["TalkTV","https://www.youtube.com/embed/DFYaNjzI1aI"],
+    ["France24","https://www.youtube.com/embed/l8PMl7tUDIE"],
+    ["wiedel interviews","https://www.youtube.com/embed/RJ0l7oX3968?list=PLGhS9sd6B4mQClc5cwz0wnUD6lV_kV84H"],
+    ["welt","https://www.youtube.com/embed/42KoZwptWjw"],
+    ["german fernsehen","https://www.youtube.com/embed/OoeHvQ1XkcY"],
+
+
+];
+
+
+//newsmax <iframe class="rumble" width="640" height="360" src="https://rumble.com/embed/v5xwnen/?pub=4" frameborder="0" allowfullscreen></iframe>
+//bannon  <iframe class="rumble" width="640" height="360" src="https://rumble.com/embed/v5xwnen/?pub=4" frameborder="0" allowfullscreen></iframe>
+
+const selectElement = document.getElementById('channelDropdown');
+channels.forEach(channel => {
+    const option = document.createElement('option');
+    option.value = channel[1]; // URL
+    option.textContent = channel[0]; // Name
+    selectElement.appendChild(option); // Append to select
+});
+
+
+
+
+
+
+function changeChannel() {
+    const input_channel = document.getElementById('channelDropdown');
+    const selectedChannelURL = input_channel.value;
+    const showChannelDiv = document.getElementById('show_channel');
+    showChannelDiv.innerHTML = '';
+    if (selectedChannelURL !== 'pick?') {
+        const iframe = document.createElement('iframe');
+        iframe.src = selectedChannelURL;
+        iframe.width = "750";
+        iframe.height = "500";
+        iframe.frameBorder = "0";
+        iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        showChannelDiv.appendChild(iframe);
+    }
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+</html>
+

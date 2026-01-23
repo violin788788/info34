@@ -1,0 +1,9 @@
+rmdir /s /q .git
+
+
+git init
+git branch -M main
+git remote add origin https://github.com/violin788788/info34.git
+git add .
+git commit -m "Fresh repo"
+git push -u origin main --force
