@@ -40,6 +40,7 @@ def index():
     files = [f for f in os.listdir(MP3S_FOLDER) if f.endswith('.mp3')]
     return render_template('info34.html', files=files)
 
+print("os_name","=",os_name)
 if "Windows" in os_name:
     os.startfile("http://127.0.0.1:5000")
     if __name__ == '__main__':
