@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { font-size: 20px; font-weight: bold; }
+    input, select { width: 10%; }
+    body {
+      background-image: url('static/fdr.png');
+      background-repeat: repeat;
+      background-color: #f0f0f0;
+    }
+    p, h1, h2, h3, h4, h5, h6, span, a, li { background-color: white; }
+    img { width: 100px; height: auto; }
+    #div_mp3s { flex: 1; margin-right: 20px; }
+  </style>
+</head>
+<body>
+
+<div id="div_mp3s">
+  {% for file in files %}
+    <b>{{ file }}</b>
+    <audio controls src="{{ url_for('static', filename='mp3s/'+file) }}"></audio>
+  {% endfor %}
+</div>
+
+<div id="tradingview_abc123" style="height:400px;"></div>
+
+<iframe src="https://www.tradingview.com/widgetembed/?symbol=AMEX:SPY&interval=1&theme=light&style=1&locale=en" width="375" height="300" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+
+<iframe src="https://www.tradingview.com/widgetembed/?symbol=AMEX:USO&interval=1&theme=light&style=1&locale=en" width="375" height="300" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+
+
+<div class="tradingview-widget-container"></div>
+
+
+
+<!-- TradingView Options Generator -->
+
+
+<h2>Generate TradingView Options URL</h2>
+<input type="text" id="symbol" placeholder="symbol" onchange="generateURL()">
+<input type="number" id="strike-price" placeholder="strike-price" onchange="generateURL()">
+<select id="call-put" onchange="generateURL()">
+  <option value="C">Call</option>
+  <option value="P">Put</option>
+</select>
+<input type="number" id="exp-month" placeholder="Month" onchange="generateURL()">
+<input type="number" id="exp-day" placeholder="Day" onchange="generateURL()">
+<input type="number" id="exp-year" value="26" onchange="generateURL()">
+<div id="generated-url"></div>
+
+
+<br><br>
+<!--
+
+
+<div id="div_select_channel">
+  <select id="select_news">
+    <option value="">news</option>
+  </select>
+</div>
+<div id="show_channel"></div>
+<br>
+<div>
+  <select id="select_link">
+    <option value="">navigate</option>
+  </select>
+</div>
+
+-->
+
+
+
+<div style="display: flex; gap: 20px;">
+
+  <div>
+    <div id="div_select_channel_1">
+      <select id="select_news_1">
+        <option value="">news</option>
+      </select>
+    </div>
+    <div id="show_channel_1"></div>
+    <br>
+    <div>
+      <select id="select_link_1">
+        <option value="">navigate</option>
+      </select>
+    </div>
+  </div>
+
+
+
+
+  <div>
+    <div id="div_select_channel_2">
+      <select id="select_news_2">
+        <option value="">news</option>
+      </select>
+    </div>
+    <div id="show_channel_2"></div>
+    <br>
+    <div>
+      <select id="select_link_2">
+        <option value="">navigate</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<br><br>
+
+<button id="open_sites_btn">Open</button>
+
+<br><br>
+
+<textarea id="input_search" placeholder="search engines" rows="4" style="height: 80px;"></textarea>
+<br>
+<select id="searchDropdown"></select>
+<button onclick="goToSite()">Go</button>
+
+<!-- Language Buttons -->
+<br><br>
+<button onclick="openLang('both')">French+German</button>
+<button onclick="openLang('de')">German</button>
+<button onclick="openLang('fr')">French</button>
+<button onclick="openLang('es')">Spanish</button>
+
+<!-- MP3 Upload -->
+<br><br>
+<form method="post" enctype="multipart/form-data">
+  <input type="file" name="file" accept=".mp3" required>
+  <button type="submit">mp3</button>
+</form>
+
+<br><br>
+
+<input type="text" id="input_used" placeholder="used stuff">
+<button onclick="open_used()">used stuff <img src="/static/used_new.jpg" alt="eBay image"></button>
+
+<br><br>
+
+<input type="text" id="input_ebay_north_america" placeholder="ebay">
+<button onclick="open_ebay_north_america()"><img src="/static/ebay_search.jpg" alt="eBay image"></button>
+<br><br>
+<div>
+  <input type="text" id="input_nonprofit" placeholder="nonprofit_lookup" />
+  <button onclick="open_nonprofit()">Go</button>
+</div>
+
+<!-- CoQ10 -->
+<h2>CoQ10 Not Select</h2>
+<ul id="ul_coq10_not_best_offer"></ul>
+
+
+<h2>CoQ10 Select</h2>
+<select id="best_offer_select"><option value="">-- Select a Brand --</option></select>
+
+<div id="div_logins"></div>
+
+
+</body>
+
+<script src="https://s3.tradingview.com/tv.js"></script>
+<script>
+/* ------------------ Channels ------------------ */
+const array_channels = [
+  ["news","news"],
+  ["Fox 24/7","https://www.youtube.com/embed/4nMfRpesYfw"],
+  ["Newsmax2 24/7","https://rumble.com/embed/v5xwnen/?pub=4"],
+  ["Bannon 24/7","https://rumble.com/embed/v6jth3u/?pub=4"],
+  ["Bloomberg 24/7","https://www.youtube.com/embed/iEpJwprxDdk"],
+  ["GBNews 24/7","https://www.youtube.com/embed/ZAJk8gdFKqs"],
+  ["francais euronews 24/7","https://www.youtube.com/embed/NiRIbKwAejk"],
+  ["France24 24/7","https://www.youtube.com/embed/l8PMl7tUDIE"],
+  ["deutsch euronews 24/7","https://www.youtube.com/embed/CQ3KsEbsYHs"],
+  ["deutsch oe24 24/7","https://www.youtube.com/embed/OoeHvQ1XkcY"]
+];
+
+
+
+const channelSelect = document.getElementById("select_news_1");
+const player = document.getElementById("player");
+const showChannelDiv = document.getElementById("show_channel_1");
+
+array_channels.forEach(([name, url]) => {
+  if (url.startsWith("http")) {
+    const opt = document.createElement("option");
+    opt.value = url;
+    opt.textContent = name;
+    channelSelect.appendChild(opt);
+  }
+});
+
+channelSelect.onchange = () => {
+  showChannelDiv.innerHTML = '';
+  if (channelSelect.value) {
+    const iframe = document.createElement('iframe');
+    iframe.src = channelSelect.value;
+    iframe.width = "750";
+    iframe.height = "500";
+    iframe.frameBorder = "0";
+    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowFullscreen = true;
+    showChannelDiv.appendChild(iframe);
+  }
+};
+
+/* ------------------ Links ------------------ */
+
+
+const array_links = [
+  ["bannon_rumble", "https://rumble.com/BannonsWarRoom"],
+  ["bannon_twitter", "https://x.com/Bannons_WarRoom"],
+  ["drive", "https://drive.google.com/drive/"],
+  ["ebay_coq10", "https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_Auction=1&_sop=15"],
+  ["github-code", "https://github.com/violin788788/info34"],
+  ["github-info34", "https://github.com/violin788788/info34"],
+  ["github-trading", "https://github.com/violin788788/trading"],
+  ["github-vote34", "https://github.com/violin788788/vote34"],
+  ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
+  ["library", "https://appointments.librarypoint.org/reserve/fx"],
+  ["logo_pixler", "https://pixlr.com/editor/"],
+  ["logos", "https://www.cleanpng.com/"],
+  ["mp3", "https://cnvmp3.com/v51"],
+  ["newsmax2", "https://rumble.com/v60552h-newsmax2-live-real-news-for-real-people.html"],
+  ["python", "https://www.pythonanywhere.com/login/?next=/"],
+  ["reddit_new", "https://www.old.reddit.com"],
+  ["reddit_new", "https://www.reddit.com"],
+  ["reddit_laot", "https://www.reddit.com/r/legaladviceofftopic/"],
+  ["screen_recorder", "https://screen-recorder.com/"],
+  ["sun", ""],
+  ["swa", "https://aifaceswap.io/"],
+  ["sw1", "https://aifaceswapper.io/video-face-swap"],
+  ["sw2", "https://www.swapfaces.ai/long-video-face-swap"],
+  ["sw3", "https://aivideofaceswap.io/"],
+  ["sw4", "https://freefaceswap.ai/video-face-swap/"],
+  ["twitter", "https://ssstwitter.com/download-twitter-mp3"],
+  ["weather", "https://www.google.com/search?q=weather&rlz=1C1AJCO_enUS1195US1195&oq=weather&aqs=chrome..69i57j0i271l2.1645j0j1&sourceid=chrome&ie=UTF-8"],
+];
+
+
+
+
+const select_link = document.getElementById("select_link_1");
+array_links.forEach(([name,url]) => {
+  if(url) {
+    const opt = document.createElement('option');
+    opt.value = url;
+    opt.textContent = name;
+    select_link.appendChild(opt);
+  }
+});
+select_link.onchange = () => {
+  if(select_link.value) {
+    window.open(select_link.value,'_blank');
+    select_link.selectedIndex = 0;
+  }
+};
+
+
+
+/* ------------------ TradingView Options ------------------ */
+new TradingView.widget({
+  "autosize": true,
+  "symbol": "NASDAQ:AAPL",
+  "interval": "D",
+  "timezone": "Etc/UTC",
+  "theme": "light",
+  "style": "1",
+  "locale": "en",
+  "toolbar_bg": "#f1f3f6",
+  "enable_publishing": false,
+  "withdateranges": true,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": true,
+  "container_id": "tradingview_abc123"
+});
+
+function generateURL() {
+  const symbol = document.getElementById('symbol').value;
+  let strikePrice = document.getElementById('strike-price').value;
+  if(!strikePrice.includes('.0')) strikePrice += '.0';
+  const callPut = document.getElementById('call-put').value;
+  const expDay = document.getElementById('exp-day').value.padStart(2,'0');
+  const expMonth = document.getElementById('exp-month').value.padStart(2,'0');
+  const expYear = document.getElementById('exp-year').value;
+  const optionsSymbol = `${symbol}${expYear}${expMonth}${expDay}${callPut}${strikePrice}`;
+  const url = `https://www.tradingview.com/chart/?symbol=OPRA%3A${encodeURIComponent(optionsSymbol)}`;
+  document.getElementById('generated-url').innerHTML = `Generated URL: <a href="${url}" target="_blank">${url}</a>`;
+}
+
+/* ------------------ Language ------------------ */
+function openLang(lang) {
+  const text = encodeURIComponent(document.getElementById("input_search").value);
+  if(!text) return;
+  if(lang === "de") window.open(`https://context.reverso.net/translation/english-german/${text}`,'_blank');
+  else if(lang === "fr") window.open(`https://context.reverso.net/translation/english-french/${text}`,'_blank');
+  else if(lang === "es") window.open(`https://context.reverso.net/translation/english-spanish/${text}`,'_blank');
+  else {
+    window.open(`https://context.reverso.net/translation/english-german/${text}`,'_blank');
+    window.open(`https://context.reverso.net/translation/english-french/${text}`,'_blank');
+  }
+}
+
+/* ------------------ Nonprofit ------------------ */
+function open_nonprofit() {
+  const searchTerm = document.getElementById("input_nonprofit").value;
+  if(searchTerm) {
+    window.open("https://apps.irs.gov/app/eos/",'_blank');
+    window.open("https://www.google.com/search?q="+searchTerm+"+ein",'_blank');
+  } else alert("Please enter a search term.");
+}
+
+/* ------------------ Login Infos ------------------ */
+
+
+/*
+const arr = ['apple', 'banana', 'cherry'];
+
+for (let i = 0; i < arr.length; i++) {
+    console.log(i, arr[i]);
+}
+
+*/
+
+
+const login_infos = [
+    ["violin788788@gmail.com", "Viovio1!"],
+    ["34ballotmeasure", "votevote"],
+    ["coffee1655", "espresso556"],
+    ["violin788788@gmail.com", "Viovio3#"],
+    ["violin788788@outlook.com", "Viovio1!"],
+    ["media788788@gmail.com", "Medmed2@"],
+    ["violin78@protonmail.com", "Viovio2@"],
+    ["violin788788@proton.me", "Viovio1!"],
+    ["info34", "Infinf1!"],
+    ["vote34", "Viovio1!"]
+];
+
+
+div_logins.innerHTML = login_infos.map(
+  ([username,password]) => `${username} <button onclick="navigator.clipboard.writeText('${username}')">📋</button>
+                          | ${password} <button onclick="navigator.clipboard.writeText('${password}')">📋</button><br>`
+).join("");
+
+
+/* ------------------ Search Dropdown ------------------ */
+const data_search = [
+    ["google","png","https://www.google.com/search?q="],
+    ["bing","png","https://www.bing.com/search?q="],
+    ["chat-150","png","https://chat.openai.com/?q=all answers given by chat in future is max 150 words,"],
+    ["chat-infinite","png","https://chat.openai.com/?q="],
+    ["wiki-en","png","https://en.wikipedia.org/wiki/"],
+    ["wiki-fr","png","https://fr.wikipedia.org/wiki/"],
+    ["wiki-de","png","https://de.wikipedia.org/wiki/"],
+    ["youtube","jpg","https://www.youtube.com/results?search_query="],
+    ["maps_google","png","https://www.google.com/maps/place/"],
+    ["wiktionary","jpg","https://en.wiktionary.org/wiki/"]
+];
+const dropdown = document.getElementById("searchDropdown");
+data_search.forEach(item => {
+  const option = document.createElement("option");
+  option.value = item[2];
+  option.text = item[0];
+  dropdown.appendChild(option);
+});
+function goToSite() {
+  const baseUrl = dropdown.value;
+  const query = document.getElementById("input_search").value.trim();
+  if(baseUrl) window.open(baseUrl + encodeURIComponent(query),'_blank');
+}
+
+/* ------------------ Utility Functions ------------------ */
+function open_url(input,url){
+  const val=document.getElementById(input).value.trim();
+  if(val) window.open(url+val,'_blank');
+}
+function open_ebay_north_america(){
+  const searchTerm = document.getElementById('input_ebay_north_america').value;
+  const finalUrl = 'https://www.ebay.com/sch/i.html?_nkw='+encodeURIComponent(searchTerm)+'&_sacat=0&_from=R40&LH_BIN=1&_sop=15&rt=nc&LH_PrefLoc=3';
+  window.open(finalUrl,'_blank');
+}
+function open_used(){
+  const query = document.getElementById("input_used").value.trim();
+  if(!query){ alert("Please type something to search."); return; }
+  const urls=[ "https://fredericksburg.craigslist.org/search/sss?postal=22401&query=__used__&search_distance=10&sort=priceasc#search=2~gallery~0",
+               "https://www.ebay.com/sch/i.html?_from=R40&_stpos=22401&_nkw=__used__&_sacat=0&_fspt=1&_sadis=25&_fcid=1&LH_PrefLoc=99&_sop=15",
+               "https://www.facebook.com/marketplace/103795126325698/search?deliveryMethod=local_pick_up&sortBy=price_ascend&query=__used__&exact=false"];
+  urls.forEach(url=>window.open(url.replace("__used__",encodeURIComponent(query)),'_blank'));
+}
+document.getElementById("open_sites_btn").onclick = ()=> {
+  ["https://www.facebook.com/","https://old.reddit.com/message/inbox/","https://twitter.com/","https://keep.google.com/"].forEach(url=>window.open(url,'_blank'));
+}
+
+/* ------------------ CoQ10 ------------------ */
+const brands_coq10 = ["zebora","nature","140","target","foster","walgreen","doctors best","vitacost","omogs","kirkland"];
+const ebay_base_url = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=---search---&_sacat=0&LH_BO=1&_sop=15";
+
+
+const best_offer_select = document.getElementById('best_offer_select');
+brands_coq10.forEach(brand => {
+  const option = document.createElement('option');
+  option.value = brand;
+  option.textContent = brand.charAt(0).toUpperCase()+brand.slice(1);
+  best_offer_select.appendChild(option);
+});
+
+
+best_offer_select.onchange = () => {
+  const brand = best_offer_select.value;
+  if(brand) window.open(ebay_base_url.replace('---search---',encodeURIComponent(brand)),'_blank');
+};
+
+</script>
+
+</html>

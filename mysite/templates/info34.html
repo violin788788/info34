@@ -18,6 +18,33 @@
 </head>
 <body>
 
+<div id="links"></div>
+
+<a href = "http://127.0.0.1:5000/earnings" target="_blank">earnings</a>
+<a href = "http://127.0.0.1:5000/datetimes" target="_blank">datetimes</a>
+<a href = "http://127.0.0.1:5000/developments" target="_blank">developments</a>
+<a href = "http://127.0.0.1:5000/vote34" target="_blank">vote34</a>
+
+<!--
+
+<a href = "meow">meow</a>
+
+  document.getElementById('generated-url').innerHTML = `Generated URL: <a href="${url}" target="_blank">${url}</a>`;
+
+navigate to..other pages
+
+
+pages = []
+pages.append("earnings")
+pages.append("datetimes")
+pages.append("developments")
+pages.append("vote34")
+
+
+
+-->
+
+
 <div id="div_mp3s">
   {% for file in files %}
     <b>{{ file }}</b>
@@ -168,6 +195,38 @@
 
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
+
+
+/*
+
+
+pages = []
+pages.append("earnings")
+pages.append("datetimes")
+pages.append("developments")
+pages.append("vote34")
+
+
+file_name = os.filename()
+for page in pages:
+if file_name==page
+  new_link = '<a href = "http://127.0.0.1:5000/" target="_blank">earnings</a>'
+
+document.getElementById('links').innerHTML = `Generated URL: <a href="${url}" target="_blank">${url}</a>`;
+
+
+
+innerhtml = 
+<div id="links"></div>
+
+
+
+#generate..links at top of pages
+
+
+*/
+
+
 /* ------------------ Channels ------------------ */
 const array_channels = [
   ["news","news"],
