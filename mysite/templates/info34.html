@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+
     * { font-size: 20px; font-weight: bold; }
 
-    select {
-      width: 100px;
-    }
+    select {width: 100px;}
 
-
+    input {width: 200px;}
 
 
     body {
@@ -162,21 +161,21 @@
 
 <br><br>
 
-<input type="text" id="input_ebay_north_america" placeholder="ebay">
-<button onclick="open_ebay_north_america()"><img src="/static/ebay_search.jpg" alt="eBay image"></button>
+<input type="text" id="input_ebay_north_america" placeholder="ebay search">
+<button onclick="open_ebay_north_america()"></button>
 <br><br>
 <div>
   <input type="text" id="input_nonprofit" placeholder="nonprofit_lookup" />
   <button onclick="open_nonprofit()">Go</button>
 </div>
 
-<!-- CoQ10 -->
-<h2>CoQ10 Not Select</h2>
-<ul id="ul_coq10_not_best_offer"></ul>
+<br><br>
 
 
-<h2>CoQ10 Select</h2>
-<select id="best_offer_select"><option value="">-- Select a Brand --</option></select>
+
+<select id="coq10_best_offer"><option value="">best coq10</option></select>
+
+<br><br>
 
 <div id="div_logins"></div>
 
@@ -185,37 +184,6 @@
 
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
-
-
-/*
-
-
-pages = []
-pages.append("earnings")
-pages.append("datetimes")
-pages.append("developments")
-pages.append("vote34")
-
-
-file_name = os.filename()
-for page in pages:
-if file_name==page
-  new_link = '<a href = "http://127.0.0.1:5000/" target="_blank">earnings</a>'
-
-document.getElementById('links').innerHTML = `Generated URL: <a href="${url}" target="_blank">${url}</a>`;
-
-
-
-innerhtml =
-<div id="links"></div>
-
-
-
-#generate..links at top of pages
-
-
-*/
-
 
 /* ------------------ Channels ------------------ */
 const array_channels = [
@@ -369,15 +337,6 @@ function open_nonprofit() {
 /* ------------------ Login Infos ------------------ */
 
 
-/*
-const arr = ['apple', 'banana', 'cherry'];
-
-for (let i = 0; i < arr.length; i++) {
-    console.log(i, arr[i]);
-}
-
-*/
-
 
 const login_infos = [
     ["violin788788@gmail.com", "Viovio1!"],
@@ -455,23 +414,45 @@ document.getElementById("open_sites_btn").onclick = ()=> {
   ["https://www.facebook.com/","https://old.reddit.com/message/inbox/","https://twitter.com/","https://keep.google.com/"].forEach(url=>window.open(url,'_blank'));
 }
 
-/* ------------------ CoQ10 ------------------ */
+
+/*
+
 const brands_coq10 = ["zebora","nature","140","target","foster","walgreen","doctors best","vitacost","omogs","kirkland"];
-const ebay_base_url = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=---search---&_sacat=0&LH_BO=1&_sop=15";
 
 
-const best_offer_select = document.getElementById('best_offer_select');
+*/
+
+const brands_coq10 = [];
+
+brands_coq10.push("zebora");
+brands_coq10.push("nature");
+brands_coq10.push("140");
+brands_coq10.push("target");
+brands_coq10.push("foster");
+brands_coq10.push("walgreen");
+brands_coq10.push("doctors best");
+brands_coq10.push("vitacost");
+brands_coq10.push("omogs");
+brands_coq10.push("kirkland");
+
+
+
+
+const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=---search---&_sacat=0&LH_BO=1&_sop=15";
+
+
+const coq10_best_offer = document.getElementById('coq10_best_offer');
 brands_coq10.forEach(brand => {
   const option = document.createElement('option');
   option.value = brand;
   option.textContent = brand.charAt(0).toUpperCase()+brand.slice(1);
-  best_offer_select.appendChild(option);
+  coq10_best_offer.appendChild(option);
 });
 
 
-best_offer_select.onchange = () => {
-  const brand = best_offer_select.value;
-  if(brand) window.open(ebay_base_url.replace('---search---',encodeURIComponent(brand)),'_blank');
+coq10_best_offer.onchange = () => {
+  const brand = coq10_best_offer.value;
+  if(brand) window.open(coq10_ebay_best.replace('---search---',encodeURIComponent(brand)),'_blank');
 };
 
 </script>
