@@ -56,7 +56,9 @@
 <!-- TradingView Options Generator -->
 
 
-<h2>Generate TradingView Options URL</h2>
+<h2>TradingView Options Search</h2>
+
+
 <input type="text" id="symbol" placeholder="symbol" onchange="generateURL()">
 <input type="number" id="strike-price" placeholder="strike-price" onchange="generateURL()">
 <select id="call-put" onchange="generateURL()">
@@ -156,17 +158,17 @@
 
 <br><br>
 
-<input type="text" id="input_used" placeholder="used stuff">
-<button onclick="open_used()">used stuff <img src="/static/used_new.jpg" alt="eBay image"></button>
+<input type="text" id="input_used" placeholder="used stuff search">
+<button onclick="open_used()">used stuff </button>
 
 <br><br>
 
 <input type="text" id="input_ebay_north_america" placeholder="ebay search">
-<button onclick="open_ebay_north_america()"></button>
+<button onclick="open_ebay_north_america()">ebay search</button>
 <br><br>
 <div>
   <input type="text" id="input_nonprofit" placeholder="nonprofit_lookup" />
-  <button onclick="open_nonprofit()">Go</button>
+  <button onclick="open_nonprofit()">nonprofit_lookup</button>
 </div>
 
 <br><br>
@@ -438,7 +440,7 @@ brands_coq10.push("kirkland");
 
 
 
-const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=---search---&_sacat=0&LH_BO=1&_sop=15";
+const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_BO=1&_sop=15";
 
 
 const coq10_best_offer = document.getElementById('coq10_best_offer');
