@@ -9,19 +9,36 @@ ALLOWED_EXTENSIONS = {'mp3'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+pages = [
+    "main",
+    "earnings",
+    "datetimes",
+    "developments",
+    "vote34"
+]
+
 app = Flask(__name__)
+
+@app.context_processor
+def inject_pages():
+    return dict(pages=pages)
+
 @app.route('/earnings')
 def earnings():
     return render_template('earnings.html')
+
 @app.route('/datetimes')
 def datetimes():
     return render_template('datetimes.html')
+
 @app.route('/developments')
 def developments():
     return render_template('developments.html')
+
 @app.route('/vote34')
 def vote34():
     return render_template('vote34.html')
+
 @app.route('/', methods=['GET', 'POST'])
 def main():
     if request.method == 'POST':
@@ -34,21 +51,6 @@ def main():
     files = [f for f in os.listdir(MP3S_FOLDER) if f.endswith('.mp3')]
     return render_template('info34.html', files=files)
 
-
-"""
-
-def index():
-    if request.method == 'POST':
-        if 'file' in request.files:
-            file = request.files['file']
-            if file.filename != '' and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(MP3S_FOLDER, filename))
-                return redirect(url_for('index'))
-    files = [f for f in os.listdir(MP3S_FOLDER) if f.endswith('.mp3')]
-    return render_template('info34.html', files=files)
-
-"""
 
 print("os_name","=",os_name)
 if "Windows" in os_name:

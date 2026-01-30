@@ -16,33 +16,16 @@
     #div_mp3s { flex: 1; margin-right: 20px; }
   </style>
 </head>
+
+
 <body>
-
-<div id="links"></div>
-
-<a href = "http://127.0.0.1:5000/earnings" target="_blank">earnings</a>
-<a href = "http://127.0.0.1:5000/datetimes" target="_blank">datetimes</a>
-<a href = "http://127.0.0.1:5000/developments" target="_blank">developments</a>
-<a href = "http://127.0.0.1:5000/vote34" target="_blank">vote34</a>
-
-<!--
-
-<a href = "meow">meow</a>
-
-  document.getElementById('generated-url').innerHTML = `Generated URL: <a href="${url}" target="_blank">${url}</a>`;
-
-navigate to..other pages
-
-
-pages = []
-pages.append("earnings")
-pages.append("datetimes")
-pages.append("developments")
-pages.append("vote34")
-
-
-
--->
+<div id="links">
+    {% for page in pages %}
+        <a href="{{ url_for(page) }}" target="_blank" rel="noopener noreferrer">
+            {{ page.capitalize() }}
+        </a>
+    {% endfor %}
+</div>
 
 
 <div id="div_mp3s">
@@ -151,12 +134,6 @@ pages.append("vote34")
 <select id="searchDropdown"></select>
 <button onclick="goToSite()">Go</button>
 
-<!-- Language Buttons -->
-<br><br>
-<button onclick="openLang('both')">French+German</button>
-<button onclick="openLang('de')">German</button>
-<button onclick="openLang('fr')">French</button>
-<button onclick="openLang('es')">Spanish</button>
 
 <!-- MP3 Upload -->
 <br><br>
@@ -216,7 +193,7 @@ document.getElementById('links').innerHTML = `Generated URL: <a href="${url}" ta
 
 
 
-innerhtml = 
+innerhtml =
 <div id="links"></div>
 
 
@@ -410,22 +387,30 @@ div_logins.innerHTML = login_infos.map(
 
 
 /* ------------------ Search Dropdown ------------------ */
+
+
 const data_search = [
-    ["google","png","https://www.google.com/search?q="],
-    ["bing","png","https://www.bing.com/search?q="],
-    ["chat-150","png","https://chat.openai.com/?q=all answers given by chat in future is max 150 words,"],
-    ["chat-infinite","png","https://chat.openai.com/?q="],
-    ["wiki-en","png","https://en.wikipedia.org/wiki/"],
-    ["wiki-fr","png","https://fr.wikipedia.org/wiki/"],
-    ["wiki-de","png","https://de.wikipedia.org/wiki/"],
-    ["youtube","jpg","https://www.youtube.com/results?search_query="],
-    ["maps_google","png","https://www.google.com/maps/place/"],
-    ["wiktionary","jpg","https://en.wiktionary.org/wiki/"]
+    ["french", "https://context.reverso.net/translation/english-french/"],
+    ["german", "https://context.reverso.net/translation/english-german/"],
+    ["google", "https://www.google.com/search?q="],
+    ["bing", "https://www.bing.com/search?q="],
+    ["chat-150", "https://chat.openai.com/?q=all answers given by chat in future is max 150 words,"],
+    ["chat-infinite", "https://chat.openai.com/?q="],
+    ["wiki-en", "https://en.wikipedia.org/wiki/"],
+    ["wiki-fr", "https://fr.wikipedia.org/wiki/"],
+    ["wiki-de", "https://de.wikipedia.org/wiki/"],
+    ["youtube", "https://www.youtube.com/results?search_query="],
+    ["maps_google", "https://www.google.com/maps/place/"],
+    ["wiktionary", "https://en.wiktionary.org/wiki/"]
 ];
+
+
+
+
 const dropdown = document.getElementById("searchDropdown");
 data_search.forEach(item => {
   const option = document.createElement("option");
-  option.value = item[2];
+  option.value = item[1];
   option.text = item[0];
   dropdown.appendChild(option);
 });
