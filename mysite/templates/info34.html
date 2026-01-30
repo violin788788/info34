@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     * { font-size: 20px; font-weight: bold; }
-    input, select { width: 10%; }
+
+    select {
+      width: 100px;
+    }
+
+
+
+
     body {
       background-image: url('static/fdr.png');
       background-repeat: repeat;
@@ -63,25 +71,24 @@
 
 
 <br><br>
-<!--
 
 
-<div id="div_select_channel">
-  <select id="select_news">
-    <option value="">news</option>
+<div>
+  <select id="select_news_1">
+    <option value="">youtube news</option>
   </select>
 </div>
-<div id="show_channel"></div>
+
 <br>
+
 <div>
-  <select id="select_link">
+  <select id="select_link_1">
     <option value="">navigate</option>
   </select>
 </div>
 
--->
 
-
+<!--
 
 <div style="display: flex; gap: 20px;">
 
@@ -93,14 +100,16 @@
     </div>
     <div id="show_channel_1"></div>
     <br>
+
+
     <div>
       <select id="select_link_1">
-        <option value="">navigate</option>
+        <option value="">youtube news</option>
       </select>
     </div>
+
+
   </div>
-
-
 
 
   <div>
@@ -117,7 +126,11 @@
       </select>
     </div>
   </div>
+
+
 </div>
+
+-->
 
 
 
@@ -379,7 +392,7 @@ const login_infos = [
     ["vote34", "Viovio1!"]
 ];
 
-
+//generates the login copy paste buttons
 div_logins.innerHTML = login_infos.map(
   ([username,password]) => `${username} <button onclick="navigator.clipboard.writeText('${username}')">📋</button>
                           | ${password} <button onclick="navigator.clipboard.writeText('${password}')">📋</button><br>`
