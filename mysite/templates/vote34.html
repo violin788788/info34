@@ -8,14 +8,16 @@
         }
     </style>
 </head>
+
+
 <body>
-
-<a href = "http://127.0.0.1:5000/earnings" target="_blank">earnings</a>
-<a href = "http://127.0.0.1:5000/datetimes" target="_blank">datetimes</a>
-<a href = "http://127.0.0.1:5000/developments" target="_blank">developments</a>
-<a href = "http://127.0.0.1:5000/vote34" target="_blank">vote34</a>
-
-    
+<div id="links">
+    {% for page in pages %}
+        <a href="{{ url_for(page) }}" target="_blank" rel="noopener noreferrer">
+            {{ page.capitalize() }}
+        </a>
+    {% endfor %}
+</div>
 
     <div id="stuff"></div>
 
@@ -120,7 +122,7 @@ html_table_states = ''
         "French Electoral Map ",
         'france_map.png',
         'we_the_people.png',
-        
+
 
     ];
 
