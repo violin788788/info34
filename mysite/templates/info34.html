@@ -76,18 +76,18 @@
 
 
 <div>
-  <select id="select_news_1">
+  <select id="select_news">
     <option value="">youtube news</option>
   </select>
 </div>
 
-<div id="show_channel_1"></div>
+<div id="show_channel"></div>
 
 <br>
 
 <div>
-  <select id="select_link_1">
-    <option value="">navigate</option>
+  <select id="select_link">
+    <option value="">url</option>
   </select>
 </div>
 
@@ -157,9 +157,9 @@ const array_channels = [
 
 
 
-const channelSelect = document.getElementById("select_news_1");
+const channelSelect = document.getElementById("select_news");
 const player = document.getElementById("player");
-const showChannelDiv = document.getElementById("show_channel_1");
+const showChannelDiv = document.getElementById("show_channel");
 
 array_channels.forEach(([name, url]) => {
   if (url.startsWith("http")) {
@@ -200,10 +200,11 @@ const array_links = [
   ["library", "https://appointments.librarypoint.org/reserve/fx"],
   ["logo_pixler", "https://pixlr.com/editor/"],
   ["logos", "https://www.cleanpng.com/"],
+  ["maps google", "https://www.google.com/maps"],
   ["mp3", "https://cnvmp3.com/v51"],
   ["newsmax2", "https://rumble.com/v60552h-newsmax2-live-real-news-for-real-people.html"],
   ["python", "https://www.pythonanywhere.com/login/?next=/"],
-  ["reddit_new", "https://www.old.reddit.com"],
+  ["reddit_old", "https://old.reddit.com/message/inbox/"],
   ["reddit_new", "https://www.reddit.com"],
   ["reddit_laot", "https://www.reddit.com/r/legaladviceofftopic/"],
   ["screen_recorder", "https://screen-recorder.com/"],
@@ -220,7 +221,7 @@ const array_links = [
 
 
 
-const select_link = document.getElementById("select_link_1");
+const select_link = document.getElementById("select_link");
 array_links.forEach(([name,url]) => {
   if(url) {
     const opt = document.createElement('option');
