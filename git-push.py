@@ -39,6 +39,17 @@ try:
 except subprocess.CalledProcessError as e:
     print(f"Error occurred: {e}")
 
+
+from datetime import datetime
+timestamp=datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+filename=f"push-{timestamp}.txt"
+with open(filename,"w") as f:
+    f.write("Hello, this is the output.\n")
+print(f"Created file: {filename}")
+
+
+
+
 sys.exit()
 
 if "Linux" in system_type:
