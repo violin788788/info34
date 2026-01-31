@@ -42,7 +42,7 @@ except subprocess.CalledProcessError as e:
 
 from datetime import datetime
 timestamp=datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-filename=f"push-{timestamp}.txt"
+filename=f"git-push-{timestamp}.txt"
 with open(filename,"w") as f:
     f.write("Hello, this is the output.\n")
 print(f"Created file: {filename}")
