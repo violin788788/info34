@@ -32,3 +32,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+from datetime import datetime
+timestamp=datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+filename=f"git-pull-{timestamp}.txt"
+with open(filename,"w") as f:
+    f.write("Hello, this is the output.\n")
+print(f"Created file: {filename}")
+
