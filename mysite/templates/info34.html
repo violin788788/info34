@@ -93,6 +93,30 @@
 
 <br><br>
 
+<!--
+translate
+-->
+
+
+
+
+  <h2>English to French/German Translator</h2>
+
+  <div class="translator">
+    <textarea id="inputText" placeholder="Type English here..." rows="5" cols="30"></textarea>
+
+    <div>
+      <button onclick="doTranslate('fr')">French</button>
+      <button onclick="doTranslate('de')">German</button>
+    </div>
+
+    <textarea id="outputText" placeholder="Translation appears here..." rows="5" cols="30" readonly></textarea>
+  </div>
+
+
+
+<br><br>
+
 <button id="open_sites_btn">Open</button>
 
 <br><br>
@@ -141,6 +165,34 @@
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
 
+
+
+async function doTranslate(lang) {
+  const text = document.getElementById('inputText').value;
+  if (!text) return alert("Please type something in English first!");
+
+  try {
+    const response = await fetch('https://libretranslate.de/translate', {
+      method: 'POST',
+      body: JSON.stringify({
+        q: text,
+        source: 'en',
+        target: lang,
+        format: 'text'
+      }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const data = await response.json();
+    document.getElementById('outputText').value = data.translatedText;
+  } catch (err) {
+    alert("Error translating: " + err);
+  }
+}
+
+
+
+
 /* ------------------ Channels ------------------ */
 const array_channels = [
   ["news","news"],
@@ -188,6 +240,7 @@ channelSelect.onchange = () => {
 
 
 const array_links = [
+  ["bank","https://www.atlanticunionbank.com/personal/online-mobile-banking/online-banking"],
   ["bannon_rumble", "https://rumble.com/BannonsWarRoom"],
   ["bannon_twitter", "https://x.com/Bannons_WarRoom"],
   ["drive", "https://drive.google.com/drive/"],
@@ -203,6 +256,7 @@ const array_links = [
   ["maps google", "https://www.google.com/maps"],
   ["mp3", "https://cnvmp3.com/v51"],
   ["newsmax2", "https://rumble.com/v60552h-newsmax2-live-real-news-for-real-people.html"],
+  ["protonmail", "https://account.proton.me/mail"],
   ["python", "https://www.pythonanywhere.com/login/?next=/"],
   ["reddit_old", "https://old.reddit.com/message/inbox/"],
   ["reddit_new", "https://www.reddit.com"],
