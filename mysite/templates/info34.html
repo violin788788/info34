@@ -137,8 +137,15 @@ translate
 
 <br><br>
 
-<input type="text" id="input_ebay_north_america" placeholder="ebay search">
-<button onclick="open_ebay_north_america()">ebay search</button>
+<input  type="text"
+        id="input_ebay_north_america"
+        placeholder="ebay search"
+        >
+
+<button onclick="open_ebay_north_america()">ebay north america</button>
+
+<button onclick="open_ebay_500_miles()">ebay 500 miles</button>
+
 <br><br>
 <div>
   <input type="text" id="input_nonprofit" placeholder="nonprofit_lookup" />
@@ -287,9 +294,9 @@ const array_links = [
   ["sw3", "https://aivideofaceswap.io/"],
   ["sw4", "https://freefaceswap.ai/video-face-swap/"],
   ["translate google", "https://translate.google.com/"],
-  ["twitter", "https://ssstwitter.com/download-twitter-mp3"],
 
-  ["twitter mp4 downloader", "https://twittervideodownloader.com/download"],
+
+  ["twitter downloader","https://ssstwitter.com/"],
 
   ["virginia assembly video", "https://vga.virginia.gov/engage/live-streaming-archives/"],
 
@@ -445,11 +452,37 @@ function open_url(input,url){
   const val=document.getElementById(input).value.trim();
   if(val) window.open(url+val,'_blank');
 }
-function open_ebay_north_america(){
+
+
+
+
+function open_ebay_north_america() {
   const searchTerm = document.getElementById('input_ebay_north_america').value;
-  const finalUrl = 'https://www.ebay.com/sch/i.html?_nkw='+encodeURIComponent(searchTerm)+'&_sacat=0&_from=R40&LH_BIN=1&_sop=15&rt=nc&LH_PrefLoc=3';
-  window.open(finalUrl,'_blank');
+
+  let finalUrl = 'https://www.ebay.com/sch/i.html?_nkw=';
+  finalUrl += encodeURIComponent(searchTerm);
+  finalUrl += '&_sacat=0&_from=R40&_sop=15';
+
+  window.open(finalUrl, '_blank');
 }
+
+
+
+function open_ebay_500_miles() {
+  const searchTerm = document.getElementById('input_ebay_north_america').value;
+
+  let finalUrl = 'https://www.ebay.com/sch/i.html?_from=R40&_stpos=22401&LH_LPickup=1&_nkw=';
+  finalUrl += encodeURIComponent(searchTerm);
+  finalUrl += '&_sacat=0&_fspt=1&LH_PrefLoc=99&_sadis=500&_fcid=1&_sop=15';
+
+  window.open(finalUrl, '_blank');
+}
+
+
+
+
+
+
 function open_used(){
   const query = document.getElementById("input_used").value.trim();
   if(!query){ alert("Please type something to search."); return; }
