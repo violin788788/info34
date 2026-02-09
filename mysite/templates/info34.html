@@ -471,12 +471,13 @@ function open_ebay_north_america() {
 function open_ebay_500_miles() {
   const searchTerm = document.getElementById('input_ebay_north_america').value;
 
-  let finalUrl = 'https://www.ebay.com/sch/i.html?_from=R40&_stpos=22401&LH_LPickup=1&_nkw=';
+  let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&_from=R40&_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&_sacat=0&_fspt=1&LH_PrefLoc=99&_sadis=500&_fcid=1&_sop=15';
-
+  finalUrl += '&_sacat=0&LH_PrefLoc=99&_stpos=22401&_sadis=500&_fspt=1&_sop=15';
   window.open(finalUrl, '_blank');
+
 }
+
 
 
 
