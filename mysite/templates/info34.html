@@ -142,9 +142,26 @@ translate
         placeholder="ebay search"
         >
 
-<button onclick="open_ebay_north_america()">ebay north america</button>
+<br>
+<button onclick="ebay_north_america()">ebay_north_america</button>
+<br>
+<button onclick="ebay_best_offer_north_america()">ebay_best_offer_north_america</button>
+<br>
+<button onclick="ebay_500_miles()">ebay_500_miles</button>
+<br>
+<button onclick="ebay_best_offer_500_miles()">ebay_best_offer_500_miles</button>
 
-<button onclick="open_ebay_500_miles()">ebay 500 miles</button>
+
+<!--
+
+https://www.ebay.com/sch/i.html?_dcat=9355&_fsrp=1&rt=nc&_from=R40&_nkw=
+
+b131dl
+
+&_sacat=0&_sop=15&LH_BO=1
+
+
+-->
 
 <br><br>
 <div>
@@ -258,7 +275,11 @@ const array_links = [
 
 
   ["drive", "https://drive.google.com/drive/"],
-  ["ebay_coq10", "https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_Auction=1&_sop=15"],
+
+
+  ["ebay_coq10", "https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_PrefLoc=3&LH_Auction=1&_sop=15"],
+
+
   ["github-code", "https://github.com/violin788788/info34"],
   ["github-info34", "https://github.com/violin788788/info34"],
   ["github-trading", "https://github.com/violin788788/trading"],
@@ -286,6 +307,9 @@ const array_links = [
   ["reddit new posts", "https://www.reddit.com/user/coffee1655/submitted/"  ],
 
   ["reddit_laot", "https://www.reddit.com/r/legaladviceofftopic/"],
+  ["reddit_politicalscience", "https://www.reddit.com/r/PoliticalScience/"],
+
+
   ["screen_recorder", "https://screen-recorder.com/"],
   ["sun", ""],
   ["swa", "https://aifaceswap.io/"],
@@ -389,7 +413,7 @@ function open_nonprofit() {
 const login_infos = [
     ["violin788788@gmail.com", "Viovio1!"],
     ["34ballotmeasure", "votevote"],
-    ["coffee1655", "espresso556"],
+    ["cow3535", "moocow55"],
     ["violin788788@gmail.com", "Viovio3#"],
     ["violin788788@outlook.com", "Viovio1!"],
     ["media788788@gmail.com", "Medmed2@"],
@@ -455,29 +479,64 @@ function open_url(input,url){
 
 
 
+/*
+best offer
+https://www.ebay.com/sch/i.html?_dcat=9355&_fsrp=1&rt=nc&_from=R40&_nkw=
+b131dl
+&_sacat=0&_sop=15&LH_BO=1
+*/
 
-function open_ebay_north_america() {
+
+function ebay_north_america() {
   const searchTerm = document.getElementById('input_ebay_north_america').value;
-
   let finalUrl = 'https://www.ebay.com/sch/i.html?_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
   finalUrl += '&_sacat=0&_from=R40&_sop=15';
-
   window.open(finalUrl, '_blank');
 }
 
-
-
-function open_ebay_500_miles() {
+function ebay_best_offer_north_america() {
   const searchTerm = document.getElementById('input_ebay_north_america').value;
+  let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&_nkw=';
+  finalUrl += encodeURIComponent(searchTerm);
+  finalUrl += '&_sacat=0&_sop=15&LH_PrefLoc=3';
+  window.open(finalUrl, '_blank');
+}
 
+function ebay_500_miles() {
+  const searchTerm = document.getElementById('input_ebay_north_america').value;
   let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&_from=R40&_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
   finalUrl += '&_sacat=0&LH_PrefLoc=99&_stpos=22401&_sadis=500&_fspt=1&_sop=15';
   window.open(finalUrl, '_blank');
-
 }
 
+function ebay_best_offer_500_miles() {
+  const searchTerm = document.getElementById('input_ebay_north_america').value;
+  let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&LH_PrefLoc=99&_nkw=';
+  finalUrl += encodeURIComponent(searchTerm);
+  finalUrl += '&_sacat=0&_sop=15&_stpos=22401&_sadis=500&_fspt=1';
+  window.open(finalUrl, '_blank');
+}
+
+
+
+
+/*
+
+best offer north america
+https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&_nkw=
+18.5v+3.5a
+&_sacat=0&_sop=15&LH_PrefLoc=3
+
+
+
+best offer 500 miles
+https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&LH_PrefLoc=99&_nkw=
+18.5v+3.5a
+&_sacat=0&_sop=15&_stpos=22401&_sadis=500&_fspt=1
+
+*/
 
 
 
