@@ -39,6 +39,12 @@
     {% endfor %}
 </div>
 
+<br>
+
+<a href="https://vote34.pythonanywhere.com/" target="_blank">vote34</a>
+
+<br>
+
 
 <div id="div_mp3s">
   {% for file in files %}
@@ -117,10 +123,24 @@ translate
 
 <br><br>
 
+all answers max 150 words..
+
+<button onclick="navigator.clipboard.writeText('all answers max 150 words..')">📋</button>
+
+<br><br>
+
 <textarea id="input_search" placeholder="search engines" rows="4" style="height: 80px;"></textarea>
 <br>
 <select id="searchDropdown"></select>
 <button onclick="goToSite()">Go</button>
+
+<br><br>
+
+<input  type="text"
+        id="input_reddit"
+        placeholder="reddit subreddit"
+        >
+
 
 
 <!-- MP3 Upload -->
@@ -143,7 +163,7 @@ translate
         >
 
 <br>
-<button onclick="ebay_north_america()">ebay_north_america</button>
+<button onclick="ebay_north_america_not_auction()">ebay_north_america_not_auction</button>
 <br>
 <button onclick="ebay_best_offer_north_america()">ebay_best_offer_north_america</button>
 <br>
@@ -272,13 +292,11 @@ const array_links = [
 
   ["cspan live", "https://live.house.gov/"],
 
-
-
   ["drive", "https://drive.google.com/drive/"],
-
-
   ["ebay_coq10", "https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_PrefLoc=3&LH_Auction=1&_sop=15"],
+  ["fredericksburg meetings archive", "https://www.regionalwebtv.com/fredcc"],
 
+  ["fredgis","https://maps.fredericksburgva.gov/ParcelViewer/#/mwl"],
 
   ["github-code", "https://github.com/violin788788/info34"],
   ["github-info34", "https://github.com/violin788788/info34"],
@@ -326,6 +344,9 @@ const array_links = [
 
 
   ["weather-forecast", "https://www.google.com/search?q=weather&rlz=1C1AJCO_enUS1195US1195&oq=weather&aqs=chrome..69i57j0i271l2.1645j0j1&sourceid=chrome&ie=UTF-8"],
+  ["weather-radar","https://weather.com/weather/radar/interactive/l/Fredericksburg+Virginia+22401?canonicalCityId=29d771c239de3f7aac3a0670102dc0e3"],
+
+
   ["weather-yesterday","https://www.timeanddate.com/weather/usa/fredericksburg/historic"],
 
   ["youtube mp3", "https://cnvmp3.com/v51"],
@@ -413,7 +434,7 @@ function open_nonprofit() {
 const login_infos = [
     ["violin788788@gmail.com", "Viovio1!"],
     ["34ballotmeasure", "votevote"],
-    ["cow3535", "moocow55"],
+    ["___reddit_new___", "___reddit_new___"],
     ["violin788788@gmail.com", "Viovio3#"],
     ["violin788788@outlook.com", "Viovio1!"],
     ["media788788@gmail.com", "Medmed2@"],
@@ -487,21 +508,23 @@ b131dl
 */
 
 
-function ebay_north_america() {
+function ebay_north_america_not_auction() {
   const searchTerm = document.getElementById('input_ebay_north_america').value;
   let finalUrl = 'https://www.ebay.com/sch/i.html?_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&_sacat=0&_from=R40&_sop=15';
+  finalUrl += '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1';
   window.open(finalUrl, '_blank');
 }
 
 function ebay_best_offer_north_america() {
   const searchTerm = document.getElementById('input_ebay_north_america').value;
-  let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&_nkw=';
+  let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&rt=nc&_from=R40&_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&_sacat=0&_sop=15&LH_PrefLoc=3';
+  finalUrl += '&_sacat=0&_sop=15&LH_PrefLoc=3&LH_BO=1';
   window.open(finalUrl, '_blank');
 }
+
+
 
 function ebay_500_miles() {
   const searchTerm = document.getElementById('input_ebay_north_america').value;
