@@ -45,6 +45,7 @@
 
 <br>
 
+<!--
 
 <div id="div_mp3s">
   {% for file in files %}
@@ -52,6 +53,8 @@
     <audio controls src="{{ url_for('static', filename='mp3s/'+file) }}"></audio>
   {% endfor %}
 </div>
+
+-->
 
 <div id="tradingview_abc123" style="height:400px;"></div>
 
@@ -101,31 +104,13 @@ url
 
 <br><br>
 
-<!--
-translate
--->
-
-
-
-
-
-
-
-
-<!--
-translate
--->
-
-
-<br><br>
-
 <button id="open_sites_btn">Browse</button>
 
 <br><br>
 
-all answers max 150 words..
+max 150 words..
 
-<button onclick="navigator.clipboard.writeText('all answers max 150 words..')">📋</button>
+<button onclick="navigator.clipboard.writeText('max 150 words..')">📋</button>
 
 <br><br>
 
@@ -144,11 +129,16 @@ all answers max 150 words..
 
 
 <!-- MP3 Upload -->
+
+<!--
 <br><br>
 <form method="post" enctype="multipart/form-data">
   <input type="file" name="file" accept=".mp3" required>
   <button type="submit">mp3</button>
 </form>
+
+-->
+
 
 <br><br>
 
@@ -158,7 +148,7 @@ all answers max 150 words..
 <br><br>
 
 <input  type="text"
-        id="input_ebay_north_america"
+        id="input_shopping_search"
         placeholder="ebay search"
         >
 
@@ -170,6 +160,8 @@ all answers max 150 words..
 <button onclick="ebay_500_miles()">ebay_500_miles</button>
 <br>
 <button onclick="ebay_best_offer_500_miles()">ebay_best_offer_500_miles</button>
+<br>
+<button onclick="amazon_search()">amazon_search</button>
 
 
 <!--
@@ -304,7 +296,6 @@ const array_links = [
   ["github-vote34", "https://github.com/violin788788/vote34"],
   ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
   ["library", "https://appointments.librarypoint.org/reserve/fx"],
-  ["logos", "https://www.cleanpng.com/"],
   ["maps google", "https://www.google.com/maps"],
   ["medicaid", "https://commonhelp.dss.virginia.gov/CASWeb/faces/loginCAS.xhtml?MODULE_NAME=CMB&SERVICE_PROVIDER=COMMON_HELP&LANGUAGE=EN"],
 
@@ -312,6 +303,9 @@ const array_links = [
   ["mp4 to mp3 converter","https://cloudconvert.com/mp4-to-mp3"],
   ["newsmax2", "https://rumble.com/v60552h-newsmax2-live-real-news-for-real-people.html"],
   ["pixlr editor", "https://pixlr.com/editor/"],
+  ["png-OpenClipart", "https://openclipart.org/"],
+  ["png-Wikimedia Commons", "https://commons.wikimedia.org/wiki/Main_Page"],
+
   ["protonmail", "https://account.proton.me/mail"],
   ["python-login", "https://www.pythonanywhere.com/login/?next=/"],
   ["python-console-info34", "https://www.pythonanywhere.com/user/info34/consoles/44684772/"],
@@ -337,6 +331,9 @@ const array_links = [
   ["sw4", "https://freefaceswap.ai/video-face-swap/"],
   ["translate google", "https://translate.google.com/"],
 
+
+
+  ["twitter downloader-mcd","https://twdown.net/download.php"],
 
   ["twitter downloader","https://ssstwitter.com/"],
 
@@ -432,14 +429,13 @@ function open_nonprofit() {
 
 
 const login_infos = [
-    ["violin788788@gmail.com", "Viovio1!"],
+    ["oak234345", "cats2534"],
     ["34ballotmeasure", "votevote"],
-    ["___reddit_new___", "___reddit_new___"],
-    ["violin788788@gmail.com", "Viovio3#"],
-    ["violin788788@outlook.com", "Viovio1!"],
-    ["media788788@gmail.com", "Medmed2@"],
-    ["violin78@protonmail.com", "Viovio2@"],
-    ["violin788788@proton.me", "Viovio1!"],
+    ["squirrel3845", "meow2745"],
+    ["Viovio1!", "Viovio3#"],
+    ["media788788", "Medmed2@"],
+    ["violin78", "Viovio2@"],
+    ["violin788788", "Viovio1!"],
     ["info34", "Infinf1!"],
     ["vote34", "Viovio1!"]
 ];
@@ -457,7 +453,7 @@ div_logins.innerHTML = login_infos.map(
 const data_search = [
 
     ["bing", "https://www.bing.com/search?q="],
-    ["chat-150", "https://chat.openai.com/?q=all answers given by chat in future is max 150 words,"],
+    ["chat-150", "https://chat.openai.com/?q=all answers you give are max 150 words..,"],
     ["chat-infinite", "https://chat.openai.com/?q="],
 
     ["french", "https://context.reverso.net/translation/english-french/"],
@@ -508,8 +504,29 @@ b131dl
 */
 
 
+
+/*
+url_parts = []
+
+new = []
+new.append(ebay_north_america_not_auction)
+new.append('https://www.ebay.com/sch/i.html?_nkw=')
+new.append(searchTerm)
+new.append('&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1')
+url_parts.append(new)
+
+new = []
+new.append(ebay_best_offer_north_america)
+new.append('https://www.ebay.com/sch/i.html?_nkw=')
+new.append(searchTerm)
+new.append('&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1')
+url_parts.append(new)
+
+*/
+
+
 function ebay_north_america_not_auction() {
-  const searchTerm = document.getElementById('input_ebay_north_america').value;
+  const searchTerm = document.getElementById('input_shopping_search').value;
   let finalUrl = 'https://www.ebay.com/sch/i.html?_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
   finalUrl += '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1';
@@ -517,7 +534,7 @@ function ebay_north_america_not_auction() {
 }
 
 function ebay_best_offer_north_america() {
-  const searchTerm = document.getElementById('input_ebay_north_america').value;
+  const searchTerm = document.getElementById('input_shopping_search').value;
   let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&rt=nc&_from=R40&_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
   finalUrl += '&_sacat=0&_sop=15&LH_PrefLoc=3&LH_BO=1';
@@ -527,7 +544,7 @@ function ebay_best_offer_north_america() {
 
 
 function ebay_500_miles() {
-  const searchTerm = document.getElementById('input_ebay_north_america').value;
+  const searchTerm = document.getElementById('input_shopping_search').value;
   let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&_from=R40&_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
   finalUrl += '&_sacat=0&LH_PrefLoc=99&_stpos=22401&_sadis=500&_fspt=1&_sop=15';
@@ -535,17 +552,36 @@ function ebay_500_miles() {
 }
 
 function ebay_best_offer_500_miles() {
-  const searchTerm = document.getElementById('input_ebay_north_america').value;
+  const searchTerm = document.getElementById('input_shopping_search').value;
   let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&LH_PrefLoc=99&_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
   finalUrl += '&_sacat=0&_sop=15&_stpos=22401&_sadis=500&_fspt=1';
   window.open(finalUrl, '_blank');
 }
 
+function amazon_search() {
+  const searchTerm = document.getElementById('input_shopping_search').value;
+  let finalUrl = 'https://www.amazon.com/s?k=';
+  finalUrl += encodeURIComponent(searchTerm);
+  finalUrl += '&s=price-asc-rank&crid=326K7KT22CD2O&qid=1774890551&sprefix=anthocyanins%2Caps%2C479&ref=sr_st_price-asc-rank&ds=v1%3AXijgGbTYwtWRl5qPv1m%2BMOxTHFaLEe3W9gOvH6Acp30';
+  window.open(finalUrl, '_blank');
+}
+
+
 
 
 
 /*
+
+
+
+https://www.amazon.com/s?k=
+anthocyanins
+&s=price-asc-rank&crid=326K7KT22CD2O&qid=1774890551&sprefix=anthocyanins%2Caps%2C479&ref=sr_st_price-asc-rank&ds=v1%3AXijgGbTYwtWRl5qPv1m%2BMOxTHFaLEe3W9gOvH6Acp30
+
+
+
+
 
 best offer north america
 https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&_nkw=
@@ -602,7 +638,9 @@ brands_coq10.push("kirkland");
 
 
 
-const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_BO=1&_sop=15";
+//const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_BO=1&_sop=15";
+const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_PrefLoc=3&LH_BO=1&_sop=15";
+
 
 
 const coq10_best_offer = document.getElementById('coq10_best_offer');
