@@ -108,11 +108,15 @@ url
 
 <br><br>
 
+<!--
+
 max 150 words..
 
 <button onclick="navigator.clipboard.writeText('max 150 words..')">📋</button>
 
 <br><br>
+
+-->
 
 <textarea id="input_search" placeholder="search engines" rows="4" style="height: 80px;"></textarea>
 <br>
@@ -126,35 +130,31 @@ max 150 words..
 
 <br><br>
 
+
+
 <input  type="text"
         id="input_shopping_search"
         placeholder="ebay search"
         >
 
 <br>
-<button onclick="ebay_north_america()">ebay_north_america</button>
+
+
+
+<button onclick="ebay_search('ebay_north_america')">ebay_north_america</button>
 <br>
-<button onclick="ebay_north_america_not_auction()">ebay_north_america_not_auction</button>
+<button onclick="ebay_search('ebay_best_offer_north_america')">ebay_north_america_best_offer</button>
 <br>
-<button onclick="ebay_best_offer_north_america()">ebay_best_offer_north_america</button>
+<button onclick="ebay_search('ebay_north_america_not_auction')">ebay_north_america_buy_it_now</button>
 <br>
-<button onclick="ebay_500_miles()">ebay_500_miles</button>
+<button onclick="ebay_search('ebay_500_miles')">ebay_north_america_500_miles</button>
 <br>
-<button onclick="ebay_best_offer_500_miles()">ebay_best_offer_500_miles</button>
+<button onclick="ebay_search('ebay_best_offer_500_miles')">ebay_north_america_500_miles_best_offer</button>
 <br>
-<button onclick="amazon_search()">amazon_search</button>
+<button onclick="ebay_search('amazon_search')">amazon_search</button>
 
 
-<!--
 
-https://www.ebay.com/sch/i.html?_dcat=9355&_fsrp=1&rt=nc&_from=R40&_nkw=
-
-b131dl
-
-&_sacat=0&_sop=15&LH_BO=1
-
-
--->
 
 <br><br>
 <div>
@@ -276,10 +276,12 @@ const array_links = [
 
   ["fredgis","https://maps.fredericksburgva.gov/ParcelViewer/#/mwl"],
 
-  ["github-code", "https://github.com/violin788788/info34"],
-  ["github-info34", "https://github.com/violin788788/info34"],
-  ["github-trading", "https://github.com/violin788788/trading"],
-  ["github-vote34", "https://github.com/violin788788/vote34"],
+  ["github-violin788788", "https://github.com/violin788788"],
+
+  ["github-violin788788-code", "https://github.com/violin788788/info34"],
+  ["github-violin788788-info34", "https://github.com/violin788788/info34"],
+  ["github-violin788788-trading", "https://github.com/violin788788/trading"],
+  ["github-violin788788-vote34", "https://github.com/violin788788/vote34"],
   ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
   ["library", "https://appointments.librarypoint.org/reserve/fx"],
   ["maps google", "https://www.google.com/maps"],
@@ -478,121 +480,45 @@ function open_url(input,url){
 }
 
 
-/*
-
-urls = []
-new = []
 
 
-const urls_ebay = {
+const searchConfigs = {
+  ebay_north_america: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&rt=nc&LH_PrefLoc=3'
+  },
   ebay_north_america_not_auction: {
     part1: 'https://www.ebay.com/sch/i.html?_nkw=',
     part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
   },
   ebay_best_offer_north_america: {
-    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
-    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+    part1: 'https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&rt=nc&_from=R40&_nkw=',
+    part3: '&_sacat=0&_sop=15&LH_PrefLoc=3&LH_BO=1'
   },
   ebay_500_miles: {
-    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
-    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+    part1: 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&_from=R40&_nkw=',
+    part3: '&_sacat=0&LH_PrefLoc=99&_stpos=22401&_sadis=500&_fspt=1&_sop=15'
   },
   ebay_best_offer_500_miles: {
-    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
-    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+    part1: 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&LH_PrefLoc=99&_nkw=',
+    part3: '&_sacat=0&_sop=15&_stpos=22401&_sadis=500&_fspt=1'
   },
   amazon_search: {
-    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
-    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+    part1: 'https://www.amazon.com/s?k=',
+    part3: '&s=price-asc-rank&crid=326K7KT22CD2O&qid=1774890551&sprefix=anthocyanins%2Caps%2C479&ref=sr_st_price-asc-rank&ds=v1%3AXijgGbTYwtWRl5qPv1m%2BMOxTHFaLEe3W9gOvH6Acp30'
   }
 };
 
 
-*/
 
-
-function ebay_north_america() {
-  const searchTerm = document.getElementById('input_shopping_search').value;
-  let finalUrl = 'https://www.ebay.com/sch/i.html?_nkw=';
-  finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&_sacat=0&_from=R40&_sop=15&rt=nc&LH_PrefLoc=3';
-  window.open(finalUrl, '_blank');
+function ebay_search(type) {
+  const input = document.getElementById("input_shopping_search").value;
+  const config = searchConfigs[type];
+  if (!config) return;
+  const url = config.part1 + encodeURIComponent(input) + config.part3;
+  window.open(url, "_blank");
 }
 
-
-
-
-function ebay_north_america_not_auction() {
-  const searchTerm = document.getElementById('input_shopping_search').value;
-  let finalUrl = 'https://www.ebay.com/sch/i.html?_nkw=';
-  finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1';
-  window.open(finalUrl, '_blank');
-}
-
-function ebay_best_offer_north_america() {
-  const searchTerm = document.getElementById('input_shopping_search').value;
-  let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&rt=nc&_from=R40&_nkw=';
-  finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&_sacat=0&_sop=15&LH_PrefLoc=3&LH_BO=1';
-  window.open(finalUrl, '_blank');
-}
-
-
-
-function ebay_500_miles() {
-  const searchTerm = document.getElementById('input_shopping_search').value;
-  let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&_from=R40&_nkw=';
-  finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&_sacat=0&LH_PrefLoc=99&_stpos=22401&_sadis=500&_fspt=1&_sop=15';
-  window.open(finalUrl, '_blank');
-}
-
-function ebay_best_offer_500_miles() {
-  const searchTerm = document.getElementById('input_shopping_search').value;
-  let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&LH_PrefLoc=99&_nkw=';
-  finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&_sacat=0&_sop=15&_stpos=22401&_sadis=500&_fspt=1';
-  window.open(finalUrl, '_blank');
-}
-
-function amazon_search() {
-  const searchTerm = document.getElementById('input_shopping_search').value;
-  let finalUrl = 'https://www.amazon.com/s?k=';
-  finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&s=price-asc-rank&crid=326K7KT22CD2O&qid=1774890551&sprefix=anthocyanins%2Caps%2C479&ref=sr_st_price-asc-rank&ds=v1%3AXijgGbTYwtWRl5qPv1m%2BMOxTHFaLEe3W9gOvH6Acp30';
-  window.open(finalUrl, '_blank');
-}
-
-
-
-
-
-/*
-
-
-
-https://www.amazon.com/s?k=
-anthocyanins
-&s=price-asc-rank&crid=326K7KT22CD2O&qid=1774890551&sprefix=anthocyanins%2Caps%2C479&ref=sr_st_price-asc-rank&ds=v1%3AXijgGbTYwtWRl5qPv1m%2BMOxTHFaLEe3W9gOvH6Acp30
-
-
-
-
-
-best offer north america
-https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&_nkw=
-18.5v+3.5a
-&_sacat=0&_sop=15&LH_PrefLoc=3
-
-
-
-best offer 500 miles
-https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&LH_PrefLoc=99&_nkw=
-18.5v+3.5a
-&_sacat=0&_sop=15&_stpos=22401&_sadis=500&_fspt=1
-
-*/
 
 
 

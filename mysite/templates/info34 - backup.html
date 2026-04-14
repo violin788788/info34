@@ -45,6 +45,7 @@
 
 <br>
 
+<!--
 
 <div id="div_mp3s">
   {% for file in files %}
@@ -52,6 +53,8 @@
     <audio controls src="{{ url_for('static', filename='mp3s/'+file) }}"></audio>
   {% endfor %}
 </div>
+
+-->
 
 <div id="tradingview_abc123" style="height:400px;"></div>
 
@@ -101,31 +104,13 @@ url
 
 <br><br>
 
-<!--
-translate
--->
-
-
-
-
-
-
-
-
-<!--
-translate
--->
-
-
-<br><br>
-
 <button id="open_sites_btn">Browse</button>
 
 <br><br>
 
-all answers max 150 words..
+max 150 words..
 
-<button onclick="navigator.clipboard.writeText('all answers max 150 words..')">📋</button>
+<button onclick="navigator.clipboard.writeText('max 150 words..')">📋</button>
 
 <br><br>
 
@@ -136,40 +121,28 @@ all answers max 150 words..
 
 <br><br>
 
-<input  type="text"
-        id="input_reddit"
-        placeholder="reddit subreddit"
-        >
-
-
-
-<!-- MP3 Upload -->
-<br><br>
-<form method="post" enctype="multipart/form-data">
-  <input type="file" name="file" accept=".mp3" required>
-  <button type="submit">mp3</button>
-</form>
-
-<br><br>
-
 <input type="text" id="input_used" placeholder="used stuff search">
 <button onclick="open_used()">used stuff </button>
 
 <br><br>
 
 <input  type="text"
-        id="input_ebay_north_america"
+        id="input_shopping_search"
         placeholder="ebay search"
         >
 
 <br>
 <button onclick="ebay_north_america()">ebay_north_america</button>
 <br>
+<button onclick="ebay_north_america_not_auction()">ebay_north_america_not_auction</button>
+<br>
 <button onclick="ebay_best_offer_north_america()">ebay_best_offer_north_america</button>
 <br>
 <button onclick="ebay_500_miles()">ebay_500_miles</button>
 <br>
 <button onclick="ebay_best_offer_500_miles()">ebay_best_offer_500_miles</button>
+<br>
+<button onclick="amazon_search()">amazon_search</button>
 
 
 <!--
@@ -197,8 +170,11 @@ b131dl
 
 <br><br>
 
+<!--
+
 <div id="div_logins"></div>
 
+-->
 
 </body>
 
@@ -293,18 +269,21 @@ const array_links = [
   ["cspan live", "https://live.house.gov/"],
 
   ["drive", "https://drive.google.com/drive/"],
-  ["ebay_coq10", "https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_PrefLoc=3&LH_Auction=1&_sop=15"],
-  ["fredericksburg meetings archive", "https://www.regionalwebtv.com/fredcc"],
+  ["ebay", "https://www.ebay.com"],
+  ["ebay_coq10_auction", "https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_PrefLoc=3&LH_Auction=1&_sop=15"],
+
+  ["fburg town meetingsarchive", "https://www.regionalwebtv.com/fredcc"],
 
   ["fredgis","https://maps.fredericksburgva.gov/ParcelViewer/#/mwl"],
 
-  ["github-code", "https://github.com/violin788788/info34"],
-  ["github-info34", "https://github.com/violin788788/info34"],
-  ["github-trading", "https://github.com/violin788788/trading"],
-  ["github-vote34", "https://github.com/violin788788/vote34"],
+  ["github-violin788788", "https://github.com/violin788788"],
+
+  ["github-violin788788-code", "https://github.com/violin788788/info34"],
+  ["github-violin788788-info34", "https://github.com/violin788788/info34"],
+  ["github-violin788788-trading", "https://github.com/violin788788/trading"],
+  ["github-violin788788-vote34", "https://github.com/violin788788/vote34"],
   ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
   ["library", "https://appointments.librarypoint.org/reserve/fx"],
-  ["logos", "https://www.cleanpng.com/"],
   ["maps google", "https://www.google.com/maps"],
   ["medicaid", "https://commonhelp.dss.virginia.gov/CASWeb/faces/loginCAS.xhtml?MODULE_NAME=CMB&SERVICE_PROVIDER=COMMON_HELP&LANGUAGE=EN"],
 
@@ -312,6 +291,9 @@ const array_links = [
   ["mp4 to mp3 converter","https://cloudconvert.com/mp4-to-mp3"],
   ["newsmax2", "https://rumble.com/v60552h-newsmax2-live-real-news-for-real-people.html"],
   ["pixlr editor", "https://pixlr.com/editor/"],
+  ["png-OpenClipart", "https://openclipart.org/"],
+  ["png-Wikimedia Commons", "https://commons.wikimedia.org/wiki/Main_Page"],
+
   ["protonmail", "https://account.proton.me/mail"],
   ["python-login", "https://www.pythonanywhere.com/login/?next=/"],
   ["python-console-info34", "https://www.pythonanywhere.com/user/info34/consoles/44684772/"],
@@ -319,17 +301,16 @@ const array_links = [
   ["python-templates-info34", "https://www.pythonanywhere.com/user/info34/files/home/info34/mysite/templates"],
 
   ["python-web-info34", "https://www.pythonanywhere.com/user/info34/webapps/#tab_id_info34_pythonanywhere_com"],
-  ["reddit old notifications", "https://old.reddit.com/message/inbox/"],
+  ["reddit new notifications", "https://www.reddit.com/message/inbox/"],
   ["reddit new", "https://www.reddit.com"],
 
-  ["reddit new posts", "https://www.reddit.com/user/coffee1655/submitted/"  ],
-
-  ["reddit_laot", "https://www.reddit.com/r/legaladviceofftopic/"],
-  ["reddit_politicalscience", "https://www.reddit.com/r/PoliticalScience/"],
-
+  ["scholar_google", "https://scholar.google.com/"],
 
   ["screen_recorder", "https://screen-recorder.com/"],
-  ["sun", ""],
+
+  ["send anywhere", "https://send-anywhere.com/"],
+
+  ["sun times", "https://www.timeanddate.com/sun/usa/fredericksburg"],
   ["swa", "https://aifaceswap.io/"],
   ["sw1", "https://aifaceswapper.io/video-face-swap"],
   ["sw2", "https://www.swapfaces.ai/long-video-face-swap"],
@@ -337,8 +318,7 @@ const array_links = [
   ["sw4", "https://freefaceswap.ai/video-face-swap/"],
   ["translate google", "https://translate.google.com/"],
 
-
-  ["twitter downloader","https://ssstwitter.com/"],
+  ["twitter to mp3/mp3 (works at mcd)","https://twdown.net/download.php"],
 
   ["virginia assembly video", "https://vga.virginia.gov/engage/live-streaming-archives/"],
 
@@ -430,16 +410,16 @@ function open_nonprofit() {
 /* ------------------ Login Infos ------------------ */
 
 
-
+/*
 const login_infos = [
-    ["violin788788@gmail.com", "Viovio1!"],
+    ["oak234345", "cats2534"],
     ["34ballotmeasure", "votevote"],
-    ["___reddit_new___", "___reddit_new___"],
-    ["violin788788@gmail.com", "Viovio3#"],
-    ["violin788788@outlook.com", "Viovio1!"],
-    ["media788788@gmail.com", "Medmed2@"],
-    ["violin78@protonmail.com", "Viovio2@"],
-    ["violin788788@proton.me", "Viovio1!"],
+    ["squirrel3845", "meow2745"],
+    ["Viovio1!", "Viovio3#"],
+    ["media788788", "Medmed2@"],
+    ["violin78", "Viovio2@"],
+    ["violin788788", "Viovio1!"],
+    ["violin788788", "Viovio3#"],
     ["info34", "Infinf1!"],
     ["vote34", "Viovio1!"]
 ];
@@ -450,6 +430,7 @@ div_logins.innerHTML = login_infos.map(
                           | ${password} <button onclick="navigator.clipboard.writeText('${password}')">📋</button><br>`
 ).join("");
 
+*/
 
 /* ------------------ Search Dropdown ------------------ */
 
@@ -457,7 +438,7 @@ div_logins.innerHTML = login_infos.map(
 const data_search = [
 
     ["bing", "https://www.bing.com/search?q="],
-    ["chat-150", "https://chat.openai.com/?q=all answers given by chat in future is max 150 words,"],
+    ["chat-150", "https://chat.openai.com/?q=all answers you give are max 150 words..,"],
     ["chat-infinite", "https://chat.openai.com/?q="],
 
     ["french", "https://context.reverso.net/translation/english-french/"],
@@ -499,33 +480,70 @@ function open_url(input,url){
 }
 
 
-
 /*
-best offer
-https://www.ebay.com/sch/i.html?_dcat=9355&_fsrp=1&rt=nc&_from=R40&_nkw=
-b131dl
-&_sacat=0&_sop=15&LH_BO=1
+
+urls = []
+new = []
+
+
+const urls_ebay = {
+  ebay_north_america_not_auction: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+  },
+  ebay_best_offer_north_america: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+  },
+  ebay_500_miles: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+  },
+  ebay_best_offer_500_miles: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+  },
+  amazon_search: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+  }
+};
+
+
 */
 
 
 function ebay_north_america() {
-  const searchTerm = document.getElementById('input_ebay_north_america').value;
+  const searchTerm = document.getElementById('input_shopping_search').value;
   let finalUrl = 'https://www.ebay.com/sch/i.html?_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&_sacat=0&_from=R40&_sop=15';
+  finalUrl += '&_sacat=0&_from=R40&_sop=15&rt=nc&LH_PrefLoc=3';
+  window.open(finalUrl, '_blank');
+}
+
+
+
+
+function ebay_north_america_not_auction() {
+  const searchTerm = document.getElementById('input_shopping_search').value;
+  let finalUrl = 'https://www.ebay.com/sch/i.html?_nkw=';
+  finalUrl += encodeURIComponent(searchTerm);
+  finalUrl += '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1';
   window.open(finalUrl, '_blank');
 }
 
 function ebay_best_offer_north_america() {
-  const searchTerm = document.getElementById('input_ebay_north_america').value;
-  let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&_nkw=';
+  const searchTerm = document.getElementById('input_shopping_search').value;
+  let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&rt=nc&_from=R40&_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
-  finalUrl += '&_sacat=0&_sop=15&LH_PrefLoc=3';
+  finalUrl += '&_sacat=0&_sop=15&LH_PrefLoc=3&LH_BO=1';
   window.open(finalUrl, '_blank');
 }
 
+
+
 function ebay_500_miles() {
-  const searchTerm = document.getElementById('input_ebay_north_america').value;
+  const searchTerm = document.getElementById('input_shopping_search').value;
   let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&_from=R40&_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
   finalUrl += '&_sacat=0&LH_PrefLoc=99&_stpos=22401&_sadis=500&_fspt=1&_sop=15';
@@ -533,17 +551,36 @@ function ebay_500_miles() {
 }
 
 function ebay_best_offer_500_miles() {
-  const searchTerm = document.getElementById('input_ebay_north_america').value;
+  const searchTerm = document.getElementById('input_shopping_search').value;
   let finalUrl = 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&LH_PrefLoc=99&_nkw=';
   finalUrl += encodeURIComponent(searchTerm);
   finalUrl += '&_sacat=0&_sop=15&_stpos=22401&_sadis=500&_fspt=1';
   window.open(finalUrl, '_blank');
 }
 
+function amazon_search() {
+  const searchTerm = document.getElementById('input_shopping_search').value;
+  let finalUrl = 'https://www.amazon.com/s?k=';
+  finalUrl += encodeURIComponent(searchTerm);
+  finalUrl += '&s=price-asc-rank&crid=326K7KT22CD2O&qid=1774890551&sprefix=anthocyanins%2Caps%2C479&ref=sr_st_price-asc-rank&ds=v1%3AXijgGbTYwtWRl5qPv1m%2BMOxTHFaLEe3W9gOvH6Acp30';
+  window.open(finalUrl, '_blank');
+}
+
+
 
 
 
 /*
+
+
+
+https://www.amazon.com/s?k=
+anthocyanins
+&s=price-asc-rank&crid=326K7KT22CD2O&qid=1774890551&sprefix=anthocyanins%2Caps%2C479&ref=sr_st_price-asc-rank&ds=v1%3AXijgGbTYwtWRl5qPv1m%2BMOxTHFaLEe3W9gOvH6Acp30
+
+
+
+
 
 best offer north america
 https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&_nkw=
@@ -573,16 +610,10 @@ function open_used(){
   urls.forEach(url=>window.open(url.replace("__used__",encodeURIComponent(query)),'_blank'));
 }
 document.getElementById("open_sites_btn").onclick = ()=> {
-  ["https://www.facebook.com/","https://old.reddit.com/message/inbox/","https://twitter.com/","https://keep.google.com/"].forEach(url=>window.open(url,'_blank'));
+  ["https://www.facebook.com/","https://www.reddit.com/message/inbox/","https://twitter.com/","https://keep.google.com/"].forEach(url=>window.open(url,'_blank'));
 }
 
 
-/*
-
-const brands_coq10 = ["zebora","nature","140","target","foster","walgreen","doctors best","vitacost","omogs","kirkland"];
-
-
-*/
 
 const brands_coq10 = [];
 
@@ -598,9 +629,8 @@ brands_coq10.push("omogs");
 brands_coq10.push("kirkland");
 
 
+const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_BO=1&LH_PrefLoc=3&_sop=15"
 
-
-const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_BO=1&_sop=15";
 
 
 const coq10_best_offer = document.getElementById('coq10_best_offer');
