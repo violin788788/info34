@@ -121,27 +121,6 @@ max 150 words..
 
 <br><br>
 
-<input  type="text"
-        id="input_reddit"
-        placeholder="reddit subreddit"
-        >
-
-
-
-<!-- MP3 Upload -->
-
-<!--
-<br><br>
-<form method="post" enctype="multipart/form-data">
-  <input type="file" name="file" accept=".mp3" required>
-  <button type="submit">mp3</button>
-</form>
-
--->
-
-
-<br><br>
-
 <input type="text" id="input_used" placeholder="used stuff search">
 <button onclick="open_used()">used stuff </button>
 
@@ -152,6 +131,8 @@ max 150 words..
         placeholder="ebay search"
         >
 
+<br>
+<button onclick="ebay_north_america()">ebay_north_america</button>
 <br>
 <button onclick="ebay_north_america_not_auction()">ebay_north_america_not_auction</button>
 <br>
@@ -189,8 +170,11 @@ b131dl
 
 <br><br>
 
+<!--
+
 <div id="div_logins"></div>
 
+-->
 
 </body>
 
@@ -285,8 +269,10 @@ const array_links = [
   ["cspan live", "https://live.house.gov/"],
 
   ["drive", "https://drive.google.com/drive/"],
-  ["ebay_coq10", "https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_PrefLoc=3&LH_Auction=1&_sop=15"],
-  ["fredericksburg meetings archive", "https://www.regionalwebtv.com/fredcc"],
+  ["ebay", "https://www.ebay.com"],
+  ["ebay_coq10_auction", "https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_PrefLoc=3&LH_Auction=1&_sop=15"],
+
+  ["fburg town meetingsarchive", "https://www.regionalwebtv.com/fredcc"],
 
   ["fredgis","https://maps.fredericksburgva.gov/ParcelViewer/#/mwl"],
 
@@ -313,17 +299,16 @@ const array_links = [
   ["python-templates-info34", "https://www.pythonanywhere.com/user/info34/files/home/info34/mysite/templates"],
 
   ["python-web-info34", "https://www.pythonanywhere.com/user/info34/webapps/#tab_id_info34_pythonanywhere_com"],
-  ["reddit old notifications", "https://old.reddit.com/message/inbox/"],
+  ["reddit new notifications", "https://www.reddit.com/message/inbox/"],
   ["reddit new", "https://www.reddit.com"],
 
-  ["reddit new posts", "https://www.reddit.com/user/coffee1655/submitted/"  ],
-
-  ["reddit_laot", "https://www.reddit.com/r/legaladviceofftopic/"],
-  ["reddit_politicalscience", "https://www.reddit.com/r/PoliticalScience/"],
-
+  ["scholar_google", "https://scholar.google.com/"],
 
   ["screen_recorder", "https://screen-recorder.com/"],
-  ["sun", ""],
+
+  ["send anywhere", "https://send-anywhere.com/"],
+
+  ["sun times", "https://www.timeanddate.com/sun/usa/fredericksburg"],
   ["swa", "https://aifaceswap.io/"],
   ["sw1", "https://aifaceswapper.io/video-face-swap"],
   ["sw2", "https://www.swapfaces.ai/long-video-face-swap"],
@@ -331,11 +316,7 @@ const array_links = [
   ["sw4", "https://freefaceswap.ai/video-face-swap/"],
   ["translate google", "https://translate.google.com/"],
 
-
-
-  ["twitter downloader-mcd","https://twdown.net/download.php"],
-
-  ["twitter downloader","https://ssstwitter.com/"],
+  ["twitter to mp3/mp3 (works at mcd)","https://twdown.net/download.php"],
 
   ["virginia assembly video", "https://vga.virginia.gov/engage/live-streaming-archives/"],
 
@@ -427,7 +408,7 @@ function open_nonprofit() {
 /* ------------------ Login Infos ------------------ */
 
 
-
+/*
 const login_infos = [
     ["oak234345", "cats2534"],
     ["34ballotmeasure", "votevote"],
@@ -436,6 +417,7 @@ const login_infos = [
     ["media788788", "Medmed2@"],
     ["violin78", "Viovio2@"],
     ["violin788788", "Viovio1!"],
+    ["violin788788", "Viovio3#"],
     ["info34", "Infinf1!"],
     ["vote34", "Viovio1!"]
 ];
@@ -446,6 +428,7 @@ div_logins.innerHTML = login_infos.map(
                           | ${password} <button onclick="navigator.clipboard.writeText('${password}')">📋</button><br>`
 ).join("");
 
+*/
 
 /* ------------------ Search Dropdown ------------------ */
 
@@ -495,34 +478,48 @@ function open_url(input,url){
 }
 
 
-
 /*
-best offer
-https://www.ebay.com/sch/i.html?_dcat=9355&_fsrp=1&rt=nc&_from=R40&_nkw=
-b131dl
-&_sacat=0&_sop=15&LH_BO=1
+
+urls = []
+new = []
+
+
+const urls_ebay = {
+  ebay_north_america_not_auction: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+  },
+  ebay_best_offer_north_america: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+  },
+  ebay_500_miles: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+  },
+  ebay_best_offer_500_miles: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+  },
+  amazon_search: {
+    part1: 'https://www.ebay.com/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+  }
+};
+
+
 */
 
 
+function ebay_north_america() {
+  const searchTerm = document.getElementById('input_shopping_search').value;
+  let finalUrl = 'https://www.ebay.com/sch/i.html?_nkw=';
+  finalUrl += encodeURIComponent(searchTerm);
+  finalUrl += '&_sacat=0&_from=R40&_sop=15&rt=nc&LH_PrefLoc=3';
+  window.open(finalUrl, '_blank');
+}
 
-/*
-url_parts = []
 
-new = []
-new.append(ebay_north_america_not_auction)
-new.append('https://www.ebay.com/sch/i.html?_nkw=')
-new.append(searchTerm)
-new.append('&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1')
-url_parts.append(new)
-
-new = []
-new.append(ebay_best_offer_north_america)
-new.append('https://www.ebay.com/sch/i.html?_nkw=')
-new.append(searchTerm)
-new.append('&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1')
-url_parts.append(new)
-
-*/
 
 
 function ebay_north_america_not_auction() {
@@ -611,16 +608,10 @@ function open_used(){
   urls.forEach(url=>window.open(url.replace("__used__",encodeURIComponent(query)),'_blank'));
 }
 document.getElementById("open_sites_btn").onclick = ()=> {
-  ["https://www.facebook.com/","https://old.reddit.com/message/inbox/","https://twitter.com/","https://keep.google.com/"].forEach(url=>window.open(url,'_blank'));
+  ["https://www.facebook.com/","https://www.reddit.com/message/inbox/","https://twitter.com/","https://keep.google.com/"].forEach(url=>window.open(url,'_blank'));
 }
 
 
-/*
-
-const brands_coq10 = ["zebora","nature","140","target","foster","walgreen","doctors best","vitacost","omogs","kirkland"];
-
-
-*/
 
 const brands_coq10 = [];
 
@@ -636,10 +627,7 @@ brands_coq10.push("omogs");
 brands_coq10.push("kirkland");
 
 
-
-
-//const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_BO=1&_sop=15";
-const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_PrefLoc=3&LH_BO=1&_sop=15";
+const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_BO=1&LH_PrefLoc=3&_sop=15"
 
 
 
