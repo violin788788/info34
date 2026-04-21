@@ -118,10 +118,13 @@ max 150 words..
 
 -->
 
+
+
 <textarea id="input_search" placeholder="search engines" rows="4" style="height: 80px;"></textarea>
 <br>
-<select id="searchDropdown"></select>
+<select id="select_search"></select>
 <button onclick="goToSite()">Go</button>
+
 
 <br><br>
 
@@ -152,8 +155,22 @@ max 150 words..
 <button onclick="ebay_search('ebay_best_offer_500_miles')">ebay_north_america_500_miles_best_offer</button>
 <br>
 <button onclick="ebay_search('amazon_search')">amazon_search</button>
+<br>
+<button onclick="ebay_search('walmart_search')">walmart_search</button>
 
 
+<br><br>
+
+  <input
+    type="text"
+    id="ebayUrl"
+    placeholder="how long has been on ebay?"
+    style="width:300px;"
+  />
+
+  <button onclick="ebay_how_long_been_there()">
+    how long has been on ebay?
+  </button>
 
 
 <br><br>
@@ -180,6 +197,25 @@ max 150 words..
 
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
+
+
+
+
+function ebay_how_long_been_there() {
+  const ebayUrl = document.getElementById("ebayUrl").value;
+
+  const match = ebayUrl.match(/\/itm\/(\d+)/);
+  if (!match) {
+    alert("Invalid eBay URL");
+    return;
+  }
+
+  const itemNumber = match[1];
+
+  const watchCountUrl = `https://www.watchcount.com/live/${itemNumber}/-/all?site=EBAY_US`;
+
+  window.open(watchCountUrl, "_blank");
+}
 
 
 
@@ -258,6 +294,9 @@ channelSelect.onchange = () => {
 const array_links = [
 
 
+
+  ["amazon","https://www.amazon.com/"],
+
   ["anthem","https://member.anthem.com/public/login"],
 
   ["bank","https://www.atlanticunionbank.com/personal/online-mobile-banking/online-banking"],
@@ -315,14 +354,14 @@ const array_links = [
   ["send anywhere", "https://send-anywhere.com/"],
 
   ["sun times", "https://www.timeanddate.com/sun/usa/fredericksburg"],
-  ["swa", "https://aifaceswap.io/"],
-  ["sw1", "https://aifaceswapper.io/video-face-swap"],
-  ["sw2", "https://www.swapfaces.ai/long-video-face-swap"],
-  ["sw3", "https://aivideofaceswap.io/"],
-  ["sw4", "https://freefaceswap.ai/video-face-swap/"],
+  ["switch", "https://aifaceswap.io/"],
+  ["switch-", "https://aifaceswapper.io/video-face-swap"],
+  ["switch--", "https://www.swapfaces.ai/long-video-face-swap"],
+  ["switch---", "https://aivideofaceswap.io/"],
+  ["switch----", "https://freefaceswap.ai/video-face-swap/"],
   ["translate google", "https://translate.google.com/"],
 
-  ["twitter to mp3/mp3 (works at mcd)","https://twdown.net/download.php"],
+  ["twitter to mp3/mp4 (works at mcd)","https://twdown.net/download.php"],
 
   ["virginia assembly video", "https://vga.virginia.gov/engage/live-streaming-archives/"],
 
@@ -414,68 +453,46 @@ function open_nonprofit() {
 /* ------------------ Login Infos ------------------ */
 
 
-/*
-const login_infos = [
-    ["oak234345", "cats2534"],
-    ["34ballotmeasure", "votevote"],
-    ["squirrel3845", "meow2745"],
-    ["Viovio1!", "Viovio3#"],
-    ["media788788", "Medmed2@"],
-    ["violin78", "Viovio2@"],
-    ["violin788788", "Viovio1!"],
-    ["violin788788", "Viovio3#"],
-    ["info34", "Infinf1!"],
-    ["vote34", "Viovio1!"]
-];
-
-//generates the login copy paste buttons
-div_logins.innerHTML = login_infos.map(
-  ([username,password]) => `${username} <button onclick="navigator.clipboard.writeText('${username}')">📋</button>
-                          | ${password} <button onclick="navigator.clipboard.writeText('${password}')">📋</button><br>`
-).join("");
-
-*/
-
-/* ------------------ Search Dropdown ------------------ */
+/* ------------------ search engines begin ------------------ */
 
 
-const data_search = [
+const dropdown = document.getElementById("select_search");
 
-    ["bing", "https://www.bing.com/search?q="],
-    ["chat-150", "https://chat.openai.com/?q=all answers you give are max 150 words..,"],
-    ["chat-infinite", "https://chat.openai.com/?q="],
+const search_engines = {
+  bing:{part1:"https://www.bing.com/search?q=",part3:""},
+  chat_150:{part1:"https://chat.openai.com/?q=all answers you give are max 150 words..,",part3:""},
+  chat_infinite:{part1:"https://chat.openai.com/?q=",part3:""},
+  french:{part1:"https://context.reverso.net/translation/english-french/",part3:""},
+  german:{part1:"https://context.reverso.net/translation/english-german/",part3:""},
+  google:{part1:"https://www.google.com/search?q=",part3:""},
+  maps_google:{part1:"https://www.google.com/maps/place/",part3:""},
+  scholar_google:{part1:"https://scholar.google.com/scholar?hl=en&as_sdt=0%2C33&q=",part3:""},
+  wiki_en:{part1:"https://en.wikipedia.org/wiki/",part3:""},
+  wiki_fr:{part1:"https://fr.wikipedia.org/wiki/",part3:""},
+  wiki_de:{part1:"https://de.wikipedia.org/wiki/",part3:""},
+  wiktionary:{part1:"https://en.wiktionary.org/wiki/",part3:""},
+  youtube_popular:{part1:"https://www.youtube.com/results?search_query=",part3:"&sp=CAM%253D"}
+};
 
-    ["french", "https://context.reverso.net/translation/english-french/"],
-    ["german", "https://context.reverso.net/translation/english-german/"],
-    ["google", "https://www.google.com/search?q="],
-
-    ["maps_google", "https://www.google.com/maps/place/"],
-
-    ["scholar google", "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C33&q="],
-
-    ["wiki-en", "https://en.wikipedia.org/wiki/"],
-    ["wiki-fr", "https://fr.wikipedia.org/wiki/"],
-    ["wiki-de", "https://de.wikipedia.org/wiki/"],
-    ["wiktionary", "https://en.wiktionary.org/wiki/"],
-    ["youtube", "https://www.youtube.com/results?search_query="],
-
-];
-
-
-
-
-const dropdown = document.getElementById("searchDropdown");
-data_search.forEach(item => {
+Object.entries(search_engines).forEach(([name, engine]) => {
   const option = document.createElement("option");
-  option.value = item[1];
-  option.text = item[0];
+  option.value = engine.part1 + "%s" + engine.part3;
+  option.text = name;
   dropdown.appendChild(option);
 });
+
 function goToSite() {
   const baseUrl = dropdown.value;
   const query = document.getElementById("input_search").value.trim();
-  if(baseUrl) window.open(baseUrl + encodeURIComponent(query),'_blank');
+  if (baseUrl) {
+    const url = baseUrl.replace("%s", encodeURIComponent(query));
+    window.open(url, "_blank");
+  }
 }
+
+/* ------------------ search engines end ------------------ */
+
+
 
 /* ------------------ Utility Functions ------------------ */
 function open_url(input,url){
@@ -509,9 +526,14 @@ const searchConfigs = {
   },
   amazon_search: {
     part1: 'https://www.amazon.com/s?k=',
-    part3: '&s=price-asc-rank&crid=326K7KT22CD2O&qid=1774890551&sprefix=anthocyanins%2Caps%2C479&ref=sr_st_price-asc-rank&ds=v1%3AXijgGbTYwtWRl5qPv1m%2BMOxTHFaLEe3W9gOvH6Acp30'
+    part3: '&rh=n%3A21513508011%2Cp_76%3A2661625011&s=price-asc-rank&dc&ds=v1%3AWwUsyqptEjxjyijx6lNLlqia1wnpj1MrRxyHxE4NyrY&crid=326K7KT22CD2O&qid=1776526952&rnid=2661623011&sprefix=anthocyanins%2Caps%2C479&ref=sr_nr_p_76_1'
+  },
+  walmart_search: {
+    part1: 'https://www.walmart.com/search?q=',
+    part3: '&sort=price_low'
   }
-};
+
+};   //end searchConfigs
 
 
 
