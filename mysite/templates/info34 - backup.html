@@ -6,6 +6,12 @@
 
   <style>
 
+      #sun_info {
+      color: white; /* only this div's text is white */
+    }
+
+
+
     * { font-size: 20px; font-weight: bold; }
 
     select {width: 100px;}
@@ -93,7 +99,20 @@
 
 <div id="show_channel"></div>
 
+<br><br>
+
+<button id="button_open_browse_1st">browse 1st</button>
+
 <br>
+
+<!--
+
+<button id="button_open_browse">browse 2nd</button>
+
+<br><br>
+
+-->
+
 url
 <br>
 <div>
@@ -102,9 +121,6 @@ url
   </select>
 </div>
 
-<br><br>
-
-<button id="open_sites_btn">Browse</button>
 
 <br><br>
 
@@ -118,10 +134,13 @@ max 150 words..
 
 -->
 
+
+
 <textarea id="input_search" placeholder="search engines" rows="4" style="height: 80px;"></textarea>
 <br>
-<select id="searchDropdown"></select>
+<select id="select_search"></select>
 <button onclick="goToSite()">Go</button>
+
 
 <br><br>
 
@@ -137,25 +156,43 @@ max 150 words..
         placeholder="ebay search"
         >
 
+
+
 <br>
+
+<button onclick="shop_search('ebay_north_america')">ebay_north_america</button>
+<br>
+<button onclick="shop_search('ebay_best_offer_north_america')">ebay_north_america_best_offer</button>
+<br>
+<button onclick="shop_search('ebay_north_america_not_auction')">ebay_north_america_buy_it_now</button>
+<br>
+<button onclick="shop_search('ebay_500_miles')">ebay_north_america_500_miles</button>
+<br>
+<button onclick="shop_search('ebay_best_offer_500_miles')">ebay_north_america_500_miles_best_offer</button>
+<br>
+<button onclick="shop_search('amazon_search')">amazon_search</button>
+<br>
+<button onclick="shop_search('walmart_search')">walmart_search</button>
+<br>
+<button onclick="shop_search('lowes_search')">lowes_search</button>
+<br>
+<button onclick="shop_search('home_depot_search')">home_depot_search</button>
+
+<br><br>
 
 
 
-<button onclick="ebay_search('ebay_north_america')">ebay_north_america</button>
-<br>
-<button onclick="ebay_search('ebay_best_offer_north_america')">ebay_north_america_best_offer</button>
-<br>
-<button onclick="ebay_search('ebay_north_america_not_auction')">ebay_north_america_buy_it_now</button>
-<br>
-<button onclick="ebay_search('ebay_500_miles')">ebay_north_america_500_miles</button>
-<br>
-<button onclick="ebay_search('ebay_best_offer_500_miles')">ebay_north_america_500_miles_best_offer</button>
-<br>
-<button onclick="ebay_search('amazon_search')">amazon_search</button>
-<br>
-<button onclick="ebay_search('walmart_search')">walmart_search</button>
 
+  <input
+    type="text"
+    id="ebayUrl"
+    placeholder="how long has been on ebay?"
+    style="width:300px;"
+  />
 
+  <button onclick="ebay_how_long_been_there()">
+    how long has been on ebay?
+  </button>
 
 
 <br><br>
@@ -178,10 +215,50 @@ max 150 words..
 
 -->
 
+
+<h2>Solstice Countdown & Sun Times</h2>
+<div id="sun_info"></div>
+
+
 </body>
 
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
+
+
+
+const now = new Date();
+const year = now.getFullYear();
+
+// Next June 21
+let nextSolstice = new Date(year, 5, 21); // months are 0-indexed: 5 = June
+if (now > nextSolstice) {
+  nextSolstice = new Date(year + 1, 5, 21);
+}
+
+const msPerDay = 1000 * 60 * 60 * 24;
+const daysLeft = Math.ceil((nextSolstice - now) / msPerDay);
+
+document.getElementById('sun_info').textContent =
+  `Days until June 21 (solstice) = ${daysLeft}`;
+
+
+
+function ebay_how_long_been_there() {
+  const ebayUrl = document.getElementById("ebayUrl").value;
+
+  const match = ebayUrl.match(/\/itm\/(\d+)/);
+  if (!match) {
+    alert("Invalid eBay URL");
+    return;
+  }
+
+  const itemNumber = match[1];
+
+  const watchCountUrl = `https://www.watchcount.com/live/${itemNumber}/-/all?site=EBAY_US`;
+
+  window.open(watchCountUrl, "_blank");
+}
 
 
 
@@ -262,82 +339,64 @@ const array_links = [
 
 
   ["amazon","https://www.amazon.com/"],
-
   ["anthem","https://member.anthem.com/public/login"],
-
   ["bank","https://www.atlanticunionbank.com/personal/online-mobile-banking/online-banking"],
   ["bannon_rumble", "https://rumble.com/BannonsWarRoom"],
   ["bannon_twitter", "https://x.com/Bannons_WarRoom"],
-
   ["clipchamp", "https://clipchamp.com/en/"],
-
-
-
+  ["coq10 ebay auction newly listed","https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_PrefLoc=1&LH_Auction=1&_sop=10"],
+  ["croxyproxy","https://croxyproxy.com/"],
   ["cspan archive", "https://www.c-span.org/search/?sdate=&edate=&searchtype=Videos&sort=Most+Recent+Airing&text=0&formatid%5B%5D=25"],
-
   ["cspan live", "https://live.house.gov/"],
-
   ["drive", "https://drive.google.com/drive/"],
   ["ebay", "https://www.ebay.com"],
-  ["ebay_coq10_auction", "https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_PrefLoc=3&LH_Auction=1&_sop=15"],
-
+  ["ebay_coq10_auction", "https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_PrefLoc=1&LH_Auction=1&_sop=15"],
+  ["facebook", "https://www.facebook.com/"],
   ["fburg town meetingsarchive", "https://www.regionalwebtv.com/fredcc"],
-
+  ["flights","https://www.google.com/travel/flights"],
   ["fredgis","https://maps.fredericksburgva.gov/ParcelViewer/#/mwl"],
-
   ["github-violin788788", "https://github.com/violin788788"],
-
   ["github-violin788788-code", "https://github.com/violin788788/info34"],
   ["github-violin788788-info34", "https://github.com/violin788788/info34"],
   ["github-violin788788-trading", "https://github.com/violin788788/trading"],
   ["github-violin788788-vote34", "https://github.com/violin788788/vote34"],
   ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
+  ["keep", "https://keep.google.com/"],
   ["library", "https://appointments.librarypoint.org/reserve/fx"],
   ["maps google", "https://www.google.com/maps"],
+  ["measure", "https://eleif.net/photomeasure"],
   ["medicaid", "https://commonhelp.dss.virginia.gov/CASWeb/faces/loginCAS.xhtml?MODULE_NAME=CMB&SERVICE_PROVIDER=COMMON_HELP&LANGUAGE=EN"],
-
   ["mp3 identify", "https://www.aha-music.com/identify-songs-music-recognition-online"],
   ["mp4 to mp3 converter","https://cloudconvert.com/mp4-to-mp3"],
   ["newsmax2", "https://rumble.com/v60552h-newsmax2-live-real-news-for-real-people.html"],
   ["pixlr editor", "https://pixlr.com/editor/"],
   ["png-OpenClipart", "https://openclipart.org/"],
   ["png-Wikimedia Commons", "https://commons.wikimedia.org/wiki/Main_Page"],
-
-  ["protonmail", "https://account.proton.me/mail"],
+  //["protonmail", "https://account.proton.me/mail"],
+  ["protonmail", "https://mail.proton.me/u/0/inbox"],
   ["python-login", "https://www.pythonanywhere.com/login/?next=/"],
   ["python-console-info34", "https://www.pythonanywhere.com/user/info34/consoles/44684772/"],
   ["python-files-info34", "https://www.pythonanywhere.com/user/info34/files/home/info34"],
   ["python-templates-info34", "https://www.pythonanywhere.com/user/info34/files/home/info34/mysite/templates"],
-
   ["python-web-info34", "https://www.pythonanywhere.com/user/info34/webapps/#tab_id_info34_pythonanywhere_com"],
   ["reddit new notifications", "https://www.reddit.com/message/inbox/"],
   ["reddit new", "https://www.reddit.com"],
-
   ["scholar_google", "https://scholar.google.com/"],
-
   ["screen_recorder", "https://screen-recorder.com/"],
-
   ["send anywhere", "https://send-anywhere.com/"],
-
   ["sun times", "https://www.timeanddate.com/sun/usa/fredericksburg"],
   ["switch", "https://aifaceswap.io/"],
   ["switch-", "https://aifaceswapper.io/video-face-swap"],
   ["switch--", "https://www.swapfaces.ai/long-video-face-swap"],
   ["switch---", "https://aivideofaceswap.io/"],
   ["switch----", "https://freefaceswap.ai/video-face-swap/"],
+  //["track", "" ],
   ["translate google", "https://translate.google.com/"],
-
   ["twitter to mp3/mp4 (works at mcd)","https://twdown.net/download.php"],
-
   ["virginia assembly video", "https://vga.virginia.gov/engage/live-streaming-archives/"],
-
-
   ["weather-forecast", "https://www.google.com/search?q=weather&rlz=1C1AJCO_enUS1195US1195&oq=weather&aqs=chrome..69i57j0i271l2.1645j0j1&sourceid=chrome&ie=UTF-8"],
   ["weather-radar","https://weather.com/weather/radar/interactive/l/Fredericksburg+Virginia+22401?canonicalCityId=29d771c239de3f7aac3a0670102dc0e3"],
-
-
   ["weather-yesterday","https://www.timeanddate.com/weather/usa/fredericksburg/historic"],
-
   ["youtube mp3", "https://cnvmp3.com/v51"],
 
 
@@ -419,67 +478,46 @@ function open_nonprofit() {
 /* ------------------ Login Infos ------------------ */
 
 
-/*
-const login_infos = [
-    ["oak234345", "cats2534"],
-    ["34ballotmeasure", "votevote"],
-    ["squirrel3845", "meow2745"],
-    ["Viovio1!", "Viovio3#"],
-    ["media788788", "Medmed2@"],
-    ["violin78", "Viovio2@"],
-    ["violin788788", "Viovio1!"],
-    ["violin788788", "Viovio3#"],
-    ["info34", "Infinf1!"],
-    ["vote34", "Viovio1!"]
-];
-
-//generates the login copy paste buttons
-div_logins.innerHTML = login_infos.map(
-  ([username,password]) => `${username} <button onclick="navigator.clipboard.writeText('${username}')">📋</button>
-                          | ${password} <button onclick="navigator.clipboard.writeText('${password}')">📋</button><br>`
-).join("");
-
-*/
-
-/* ------------------ Search Dropdown ------------------ */
+/* ------------------ search engines begin ------------------ */
 
 
-const search_engines = [
+const dropdown = document.getElementById("select_search");
 
-    ["bing", "https://www.bing.com/search?q="],
-    ["chat-150", "https://chat.openai.com/?q=all answers you give are max 150 words..,"],
-    ["chat-infinite", "https://chat.openai.com/?q="],
-    ["french", "https://context.reverso.net/translation/english-french/"],
-    ["german", "https://context.reverso.net/translation/english-german/"],
-    ["google", "https://www.google.com/search?q="],
-    ["maps_google", "https://www.google.com/maps/place/"],
-    ["scholar google", "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C33&q="],
-    ["wiki-en", "https://en.wikipedia.org/wiki/"],
-    ["wiki-fr", "https://fr.wikipedia.org/wiki/"],
-    ["wiki-de", "https://de.wikipedia.org/wiki/"],
-    ["wiktionary", "https://en.wiktionary.org/wiki/"],
-    ["youtube", "https://www.youtube.com/results?search_query="],
+const search_engines = {
+  bing:{part1:"https://www.bing.com/search?q=",part3:""},
+  chat_125:{part1:"https://chat.openai.com/?q=all answers you give are max 125 words..,",part3:""},
+  chat_infinite:{part1:"https://chat.openai.com/?q=",part3:""},
+  french:{part1:"https://context.reverso.net/translation/english-french/",part3:""},
+  german:{part1:"https://context.reverso.net/translation/english-german/",part3:""},
+  google:{part1:"https://www.google.com/search?q=",part3:""},
+  maps_google:{part1:"https://www.google.com/maps/place/",part3:""},
+  scholar_google:{part1:"https://scholar.google.com/scholar?hl=en&as_sdt=0%2C33&q=",part3:""},
+  wiki_en:{part1:"https://en.wikipedia.org/wiki/",part3:""},
+  wiki_fr:{part1:"https://fr.wikipedia.org/wiki/",part3:""},
+  wiki_de:{part1:"https://de.wikipedia.org/wiki/",part3:""},
+  wiktionary:{part1:"https://en.wiktionary.org/wiki/",part3:""},
+  youtube_popular:{part1:"https://www.youtube.com/results?search_query=",part3:"&sp=CAM%253D"}
+};
 
-];
-
-//youtube popular
-//https://www.youtube.com/results?search_query=bombing+montage&sp=CAM%253D
-
-const dropdown = document.getElementById("searchDropdown");
-search_engines.forEach(item => {
+Object.entries(search_engines).forEach(([name, engine]) => {
   const option = document.createElement("option");
-  option.value = item[1];
-  option.text = item[0];
+  option.value = engine.part1 + "%s" + engine.part3;
+  option.text = name;
   dropdown.appendChild(option);
 });
-
-
 
 function goToSite() {
   const baseUrl = dropdown.value;
   const query = document.getElementById("input_search").value.trim();
-  if(baseUrl) window.open(baseUrl + encodeURIComponent(query),'_blank');
+  if (baseUrl) {
+    const url = baseUrl.replace("%s", encodeURIComponent(query));
+    window.open(url, "_blank");
+  }
 }
+
+/* ------------------ search engines end ------------------ */
+
+
 
 /* ------------------ Utility Functions ------------------ */
 function open_url(input,url){
@@ -488,20 +526,21 @@ function open_url(input,url){
 }
 
 
+//searchConfigs
 
 
 const searchConfigs = {
   ebay_north_america: {
     part1: 'https://www.ebay.com/sch/i.html?_nkw=',
-    part3: '&_sacat=0&_from=R40&_sop=15&rt=nc&LH_PrefLoc=3'
+    part3: '&_sacat=0&_from=R40&_sop=15&rt=nc&LH_PrefLoc=1'
   },
   ebay_north_america_not_auction: {
     part1: 'https://www.ebay.com/sch/i.html?_nkw=',
-    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=3&rt=nc&LH_BIN=1'
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=1&rt=nc&LH_BIN=1'
   },
   ebay_best_offer_north_america: {
     part1: 'https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&rt=nc&_from=R40&_nkw=',
-    part3: '&_sacat=0&_sop=15&LH_PrefLoc=3&LH_BO=1'
+    part3: '&_sacat=0&_sop=15&LH_PrefLoc=1&LH_BO=1'
   },
   ebay_500_miles: {
     part1: 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&_from=R40&_nkw=',
@@ -518,13 +557,19 @@ const searchConfigs = {
   walmart_search: {
     part1: 'https://www.walmart.com/search?q=',
     part3: '&sort=price_low'
+  },
+   lowes_search: {
+    part1: 'https://www.lowes.com/search?searchTerm=',
+    part3: '&sortMethod=sortBy_priceLowToHigh&inStock=1&rollUpVariants=0'
+  },
+   home_depot_search: {
+    part1: 'https://www.homedepot.com/b/Pick-Up-Today/N-5yc1vZ1z175a5/Ntk-elastic/Ntt- ',
+    part3: '?NCNI-5&sortby=price&sortorder=asc'
   }
 
 };   //end searchConfigs
 
-
-
-function ebay_search(type) {
+function shop_search(type) {
   const input = document.getElementById("input_shopping_search").value;
   const config = searchConfigs[type];
   if (!config) return;
@@ -546,9 +591,30 @@ function open_used(){
                "https://www.facebook.com/marketplace/103795126325698/search?deliveryMethod=local_pick_up&sortBy=price_ascend&query=__used__&exact=false"];
   urls.forEach(url=>window.open(url.replace("__used__",encodeURIComponent(query)),'_blank'));
 }
-document.getElementById("open_sites_btn").onclick = ()=> {
-  ["https://www.facebook.com/","https://www.reddit.com/message/inbox/","https://twitter.com/","https://keep.google.com/"].forEach(url=>window.open(url,'_blank'));
+
+
+
+document.getElementById("button_open_browse_1st").onclick = ()=> {
+  ["https://www.facebook.com/",
+   "https://www.reddit.com/message/inbox/",
+   "https://www.reddit.com/user/squirrel3845/submitted/",
+   "https://twitter.com/",
+   "https://keep.google.com/"
+   ].forEach(url=>window.open(url,'_blank'));
 }
+
+/*
+
+document.getElementById("button_open_browse_2nd").onclick = ()=> {
+  ["https://www.facebook.com/",
+   "https://www.reddit.com/message/inbox/",
+   "https://www.reddit.com/user/squirrel3845/submitted/",
+   "https://twitter.com/",
+   "https://keep.google.com/"
+   ].forEach(url=>window.open(url,'_blank'));
+}
+
+*/
 
 
 
@@ -566,7 +632,7 @@ brands_coq10.push("omogs");
 brands_coq10.push("kirkland");
 
 
-const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_BO=1&LH_PrefLoc=3&_sop=15"
+const coq10_ebay_best = "https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&_from=R40&_nkw=coq10 ---search---&_sacat=0&LH_BO=1&LH_PrefLoc=1&_sop=15"
 
 
 

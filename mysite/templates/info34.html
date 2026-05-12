@@ -156,26 +156,32 @@ max 150 words..
         placeholder="ebay search"
         >
 
-<br>
 
 
+<br>
 
-<button onclick="ebay_search('ebay_north_america')">ebay_north_america</button>
+<button onclick="shop_search('ebay_north_america')">ebay_north_america</button>
 <br>
-<button onclick="ebay_search('ebay_best_offer_north_america')">ebay_north_america_best_offer</button>
+<button onclick="shop_search('ebay_best_offer_north_america')">ebay_north_america_best_offer</button>
 <br>
-<button onclick="ebay_search('ebay_north_america_not_auction')">ebay_north_america_buy_it_now</button>
+<button onclick="shop_search('ebay_north_america_not_auction')">ebay_north_america_buy_it_now</button>
 <br>
-<button onclick="ebay_search('ebay_500_miles')">ebay_north_america_500_miles</button>
+<button onclick="shop_search('ebay_500_miles')">ebay_north_america_500_miles</button>
 <br>
-<button onclick="ebay_search('ebay_best_offer_500_miles')">ebay_north_america_500_miles_best_offer</button>
+<button onclick="shop_search('ebay_best_offer_500_miles')">ebay_north_america_500_miles_best_offer</button>
 <br>
-<button onclick="ebay_search('amazon_search')">amazon_search</button>
+<button onclick="shop_search('amazon_search')">amazon_search</button>
 <br>
-<button onclick="ebay_search('walmart_search')">walmart_search</button>
-
+<button onclick="shop_search('walmart_search')">walmart_search</button>
+<br>
+<button onclick="shop_search('lowes_search')">lowes_search</button>
+<br>
+<button onclick="shop_search('home_depot_search')">home_depot_search</button>
 
 <br><br>
+
+
+
 
   <input
     type="text"
@@ -355,8 +361,10 @@ const array_links = [
   ["github-violin788788-trading", "https://github.com/violin788788/trading"],
   ["github-violin788788-vote34", "https://github.com/violin788788/vote34"],
   ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
+  ["keep", "https://keep.google.com/"],
   ["library", "https://appointments.librarypoint.org/reserve/fx"],
   ["maps google", "https://www.google.com/maps"],
+  ["measure", "https://eleif.net/photomeasure"],
   ["medicaid", "https://commonhelp.dss.virginia.gov/CASWeb/faces/loginCAS.xhtml?MODULE_NAME=CMB&SERVICE_PROVIDER=COMMON_HELP&LANGUAGE=EN"],
   ["mp3 identify", "https://www.aha-music.com/identify-songs-music-recognition-online"],
   ["mp4 to mp3 converter","https://cloudconvert.com/mp4-to-mp3"],
@@ -385,6 +393,7 @@ const array_links = [
   //["track", "" ],
   ["translate google", "https://translate.google.com/"],
   ["twitter to mp3/mp4 (works at mcd)","https://twdown.net/download.php"],
+  ["vehicles-craigslist", "https://fredericksburg.craigslist.org/search/cta?sort=priceasc#search=2~gallery~34"],
   ["virginia assembly video", "https://vga.virginia.gov/engage/live-streaming-archives/"],
   ["weather-forecast", "https://www.google.com/search?q=weather&rlz=1C1AJCO_enUS1195US1195&oq=weather&aqs=chrome..69i57j0i271l2.1645j0j1&sourceid=chrome&ie=UTF-8"],
   ["weather-radar","https://weather.com/weather/radar/interactive/l/Fredericksburg+Virginia+22401?canonicalCityId=29d771c239de3f7aac3a0670102dc0e3"],
@@ -518,6 +527,7 @@ function open_url(input,url){
 }
 
 
+//searchConfigs
 
 
 const searchConfigs = {
@@ -548,13 +558,19 @@ const searchConfigs = {
   walmart_search: {
     part1: 'https://www.walmart.com/search?q=',
     part3: '&sort=price_low'
+  },
+   lowes_search: {
+    part1: 'https://www.lowes.com/search?searchTerm=',
+    part3: '&sortMethod=sortBy_priceLowToHigh&inStock=1&rollUpVariants=0'
+  },
+   home_depot_search: {
+    part1: 'https://www.homedepot.com/b/Pick-Up-Today/N-5yc1vZ1z175a5/Ntk-elastic/Ntt- ',
+    part3: '?NCNI-5&sortby=price&sortorder=asc'
   }
 
 };   //end searchConfigs
 
-
-
-function ebay_search(type) {
+function shop_search(type) {
   const input = document.getElementById("input_shopping_search").value;
   const config = searchConfigs[type];
   if (!config) return;
