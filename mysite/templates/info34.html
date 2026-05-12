@@ -153,7 +153,7 @@ max 150 words..
 
 <input  type="text"
         id="input_shopping_search"
-        placeholder="ebay search"
+        placeholder="search"
         >
 
 
@@ -177,6 +177,8 @@ max 150 words..
 <button onclick="shop_search('lowes_search')">lowes_search</button>
 <br>
 <button onclick="shop_search('home_depot_search')">home_depot_search</button>
+<br>
+<button onclick="shop_search('board_google')">board_google</button>
 
 <br><br>
 
@@ -354,6 +356,7 @@ const array_links = [
   ["facebook", "https://www.facebook.com/"],
   ["fburg town meetingsarchive", "https://www.regionalwebtv.com/fredcc"],
   ["flights","https://www.google.com/travel/flights"],
+  ["fortunate son","https://www.youtube.com/watch?v=ZWijx_AgPiA&list=RDZWijx_AgPiA&start_radio=1"],
   ["fredgis","https://maps.fredericksburgva.gov/ParcelViewer/#/mwl"],
   ["github-violin788788", "https://github.com/violin788788"],
   ["github-violin788788-code", "https://github.com/violin788788/info34"],
@@ -370,6 +373,9 @@ const array_links = [
   ["mp4 to mp3 converter","https://cloudconvert.com/mp4-to-mp3"],
   ["newsmax2", "https://rumble.com/v60552h-newsmax2-live-real-news-for-real-people.html"],
   ["pixlr editor", "https://pixlr.com/editor/"],
+
+  ["play google", "https://play.google.com/"],
+
   ["png-OpenClipart", "https://openclipart.org/"],
   ["png-Wikimedia Commons", "https://commons.wikimedia.org/wiki/Main_Page"],
   //["protonmail", "https://account.proton.me/mail"],
@@ -566,7 +572,12 @@ const searchConfigs = {
    home_depot_search: {
     part1: 'https://www.homedepot.com/b/Pick-Up-Today/N-5yc1vZ1z175a5/Ntk-elastic/Ntt- ',
     part3: '?NCNI-5&sortby=price&sortorder=asc'
-  }
+  },
+   board_google: {
+    part1: ' https://www.google.com/search?q= ',
+    part3: ' &udm=2 '
+  },
+
 
 };   //end searchConfigs
 
