@@ -340,7 +340,8 @@ const array_links = [
 
 
 
-  ["amazon","https://www.amazon.com/"],
+  ["amazon.com","http://amazon.com/"],
+  ["amazon login","https://www.amazon.com/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fyour-orders%2Forders%3Fref_%3Dnav_AccountFlyout_orders&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=amzn_retail_yourorders_us&openid.mode=checkid_setup&language=en_US&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0"],
   ["anthem","https://member.anthem.com/public/login"],
   ["bank","https://www.atlanticunionbank.com/personal/online-mobile-banking/online-banking"],
   ["bannon_rumble", "https://rumble.com/BannonsWarRoom"],
@@ -379,12 +380,19 @@ const array_links = [
   ["png-OpenClipart", "https://openclipart.org/"],
   ["png-Wikimedia Commons", "https://commons.wikimedia.org/wiki/Main_Page"],
   //["protonmail", "https://account.proton.me/mail"],
-  ["protonmail", "https://mail.proton.me/u/0/inbox"],
+  ["proton.me", "https://mail.proton.me/u/0/inbox"],
+
+
+  ["python0-templates-info34", "https://www.pythonanywhere.com/user/info34/files/home/info34/mysite/templates"],
+  ["python1-web-info34", "https://www.pythonanywhere.com/user/info34/webapps/#tab_id_info34_pythonanywhere_com"],
+
+
+
   ["python-login", "https://www.pythonanywhere.com/login/?next=/"],
   ["python-console-info34", "https://www.pythonanywhere.com/user/info34/consoles/44684772/"],
   ["python-files-info34", "https://www.pythonanywhere.com/user/info34/files/home/info34"],
-  ["python-templates-info34", "https://www.pythonanywhere.com/user/info34/files/home/info34/mysite/templates"],
-  ["python-web-info34", "https://www.pythonanywhere.com/user/info34/webapps/#tab_id_info34_pythonanywhere_com"],
+
+
   ["reddit new notifications", "https://www.reddit.com/message/inbox/"],
   ["reddit new", "https://www.reddit.com"],
   ["scholar_google", "https://scholar.google.com/"],
@@ -400,6 +408,10 @@ const array_links = [
   ["translate google", "https://translate.google.com/"],
   ["twitter to mp3/mp4 (works at mcd)","https://twdown.net/download.php"],
   ["vehicles-craigslist", "https://fredericksburg.craigslist.org/search/cta?sort=priceasc#search=2~gallery~34"],
+
+  ["virginia Business Entity Search","https://cis.scc.virginia.gov/EntitySearch/Index"],
+
+
   ["virginia 2.0","https://eapps.courts.state.va.us/ocis/landing"],
   ["virginia assembly video", "https://vga.virginia.gov/engage/live-streaming-archives/"],
   ["weather-forecast", "https://www.google.com/search?q=weather&rlz=1C1AJCO_enUS1195US1195&oq=weather&aqs=chrome..69i57j0i271l2.1645j0j1&sourceid=chrome&ie=UTF-8"],
@@ -493,7 +505,7 @@ const dropdown = document.getElementById("select_search");
 
 const search_engines = {
   bing:{part1:"https://www.bing.com/search?q=",part3:""},
-  chat_125:{part1:"https://chat.openai.com/?q=all answers you give are max 125 words..,",part3:""},
+  chat_100:{part1:"https://chat.openai.com/?q=all answers you give are max 100 words..,",part3:""},
   chat_infinite:{part1:"https://chat.openai.com/?q=",part3:""},
   french:{part1:"https://context.reverso.net/translation/english-french/",part3:""},
   german:{part1:"https://context.reverso.net/translation/english-german/",part3:""},
@@ -609,8 +621,8 @@ function open_used(){
 
 document.getElementById("button_open_browse_1st").onclick = ()=> {
   ["https://www.facebook.com/",
+  "https://www.reddit.com/user/squirrel3845/submitted/",
    "https://www.reddit.com/message/inbox/",
-   "https://www.reddit.com/user/squirrel3845/submitted/",
    "https://twitter.com/",
    "https://keep.google.com/"
    ].forEach(url=>window.open(url,'_blank'));
