@@ -14,7 +14,7 @@
 
     * { font-size: 20px; font-weight: bold; }
 
-    select {width: 100px;}
+    select {width: 200px;}
 
     input {width: 200px;}
 
@@ -134,70 +134,52 @@ max 150 words..
 
 -->
 
-<textarea id="input_search" placeholder="search engines" rows="4" style="height: 80px;"></textarea>
+<textarea id="input_search" placeholder="chat/bing/youtube" rows="4" style="height: 80px;"></textarea>
 <br>
 <select id="select_search"></select>
 <button onclick="goToSite()">Go</button>
 
 <br><br>
 
-<input type="text" id="input_used" placeholder="used stuff search">
-<button onclick="open_used()">used stuff </button>
+<input type="text" id="input_used" placeholder="fb marketplace/craigslist/local ebay">
+<button onclick="open_used()">fb marketplace/craigslist/local ebay</button>
 
 <br><br>
-shop search input
+
+
+ebay/amazon input
+
+
 <br>
+
+
 <input  type="text"
         id="input_shopping_search"
-        placeholder="shop search input"
+        placeholder="ebay/amazon input"
 >
 
 <br><br>
 
-new select thing
+ebay/amazon search select
 
 <br><br>
 
 
 <select id="shop_dropdown">
 
-  <option value="">Select Search</option>
+  <option value="">ebay/amazon select</option>
+  <option value="ebay_north_america">ebay_north_america</option>
+  <option value="ebay_best_offer_north_america">ebay_north_america_best_offer</option>
+  <option value="ebay_north_america_not_auction">ebay_north_america_buy_it_now</option>
+  <option value="ebay_500_miles">ebay_north_america_500_miles</option>
+  <option value="ebay_best_offer_500_miles">ebay_north_america_500_miles_best_offer</option>
+  <option value="amazon_search">amazon_search</option>
+  <option value="walmart_search">walmart_search</option>
+  <option value="lowes_search">lowes_search</option>
+  <option value="home_depot_search">home_depot_search</option>
+  <option value="deutsch_ebay">deutsch_ebay</option>
+  <option value="deutsch_amazon">deutsch_amazon</option>
 
-  <option value="ebay_north_america">
-    ebay_north_america
-  </option>
-
-  <option value="ebay_best_offer_north_america">
-    ebay_north_america_best_offer
-  </option>
-
-  <option value="ebay_north_america_not_auction">
-    ebay_north_america_buy_it_now
-  </option>
-
-  <option value="ebay_500_miles">
-    ebay_north_america_500_miles
-  </option>
-
-  <option value="ebay_best_offer_500_miles">
-    ebay_north_america_500_miles_best_offer
-  </option>
-
-  <option value="amazon_search">
-    amazon_search
-  </option>
-
-  <option value="walmart_search">
-    walmart_search
-  </option>
-
-  <option value="lowes_search">
-    lowes_search
-  </option>
-
-  <option value="home_depot_search">
-    home_depot_search
-  </option>
 
 </select>
 
@@ -536,7 +518,7 @@ const search_engines = {
   wiki_fr:{part1:"https://fr.wikipedia.org/wiki/",part3:""},
   wiki_de:{part1:"https://de.wikipedia.org/wiki/",part3:""},
   wiktionary:{part1:"https://en.wiktionary.org/wiki/",part3:""},
-  youtube_popular:{part1:"https://www.youtube.com/results?search_query=",part3:"&sp=CAM%253D"}
+  youtube_popular:{part1:"https://www.youtube.com/results?search_query=",part3:"&sp=CAM%253D"},
 };
 
 Object.entries(search_engines).forEach(([name, engine]) => {
@@ -572,40 +554,38 @@ function open_url(input,url){
 const searchConfigs = {
   ebay_north_america: {
     part1: 'https://www.ebay.com/sch/i.html?_nkw=',
-    part3: '&_sacat=0&_from=R40&_sop=15&rt=nc&LH_PrefLoc=1'
-  },
+    part3: '&_sacat=0&_from=R40&_sop=15&rt=nc&LH_PrefLoc=1'},
   ebay_north_america_not_auction: {
     part1: 'https://www.ebay.com/sch/i.html?_nkw=',
-    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=1&rt=nc&LH_BIN=1'
-  },
+    part3: '&_sacat=0&_from=R40&_sop=15&LH_PrefLoc=1&rt=nc&LH_BIN=1'},
   ebay_best_offer_north_america: {
     part1: 'https://www.ebay.com/sch/i.html?_dcat=11776&_fsrp=1&rt=nc&_from=R40&_nkw=',
-    part3: '&_sacat=0&_sop=15&LH_PrefLoc=1&LH_BO=1'
-  },
+    part3: '&_sacat=0&_sop=15&LH_PrefLoc=1&LH_BO=1'},
   ebay_500_miles: {
     part1: 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&_from=R40&_nkw=',
-    part3: '&_sacat=0&LH_PrefLoc=99&_stpos=22401&_sadis=500&_fspt=1&_sop=15'
-  },
+    part3: '&_sacat=0&LH_PrefLoc=99&_stpos=22401&_sadis=500&_fspt=1&_sop=15'},
   ebay_best_offer_500_miles: {
     part1: 'https://www.ebay.com/sch/i.html?_dcat=31510&_fsrp=1&LH_BO=1&rt=nc&_from=R40&LH_PrefLoc=99&_nkw=',
-    part3: '&_sacat=0&_sop=15&_stpos=22401&_sadis=500&_fspt=1'
-  },
+    part3: '&_sacat=0&_sop=15&_stpos=22401&_sadis=500&_fspt=1'},
   amazon_search: {
     part1: 'https://www.amazon.com/s?k=',
-    part3: '&rh=n%3A21513508011%2Cp_76%3A2661625011&s=price-asc-rank&dc&ds=v1%3AWwUsyqptEjxjyijx6lNLlqia1wnpj1MrRxyHxE4NyrY&crid=326K7KT22CD2O&qid=1776526952&rnid=2661623011&sprefix=anthocyanins%2Caps%2C479&ref=sr_nr_p_76_1'
-  },
+    part3: '&rh=n%3A21513508011%2Cp_76%3A2661625011&s=price-asc-rank&dc&ds=v1%3AWwUsyqptEjxjyijx6lNLlqia1wnpj1MrRxyHxE4NyrY&crid=326K7KT22CD2O&qid=1776526952&rnid=2661623011&sprefix=anthocyanins%2Caps%2C479&ref=sr_nr_p_76_1'},
   walmart_search: {
     part1: 'https://www.walmart.com/search?q=',
-    part3: '&sort=price_low'
-  },
-   lowes_search: {
+    part3: '&sort=price_low'},
+  lowes_search: {
     part1: 'https://www.lowes.com/search?searchTerm=',
-    part3: '&sortMethod=sortBy_priceLowToHigh&inStock=1&rollUpVariants=0'
-  },
-   home_depot_search: {
+    part3: '&sortMethod=sortBy_priceLowToHigh&inStock=1&rollUpVariants=0'},
+  home_depot_search: {
     part1: 'https://www.homedepot.com/b/Pick-Up-Today/N-5yc1vZ1z175a5/Ntk-elastic/Ntt- ',
-    part3: '?NCNI-5&sortby=price&sortorder=asc'
-  }
+    part3: '?NCNI-5&sortby=price&sortorder=asc'},
+  deutsch_ebay: {
+    part1: 'https://www.ebay.de/sch/i.html?_nkw=',
+    part3: '&_sacat=0&_from=R40&_sop=15&rt=nc&LH_PrefLoc=3'},
+  deutsch_amazon: {
+    part1: 'https://www.amazon.de/s?k=',
+    part3: '&crid=2WG9DPQERL4UM&sprefix=6560b%2Caps%2C227&ref=nb_sb_noss_2'},
+
 
 };   //end searchConfigs
 
@@ -637,7 +617,6 @@ function open_used(){
 document.getElementById("button_open_browse_1st").onclick = ()=> {
   ["https://www.facebook.com/",
    "https://www.reddit.com/message/inbox/",
-   "https://www.reddit.com/user/squirrel3845/submitted/",
    "https://twitter.com/",
    "https://keep.google.com/"
    ].forEach(url=>window.open(url,'_blank'));
