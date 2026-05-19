@@ -102,6 +102,8 @@
 <br><br>
 
 <button id="button_open_browse_1st">browse 1st</button>
+<br>
+<button id="button_open_browse_2nd">browse 2nd</button>
 
 <br><br>
 
@@ -398,7 +400,7 @@ const array_links = [
   ["python-login", "https://www.pythonanywhere.com/login/?next=/"],
 
 
-  ["python-console-info34", "https://www.pythonanywhere.com/user/info34/consoles/44684772/"],
+  ["python-console-info34", "https://www.pythonanywhere.com/user/info34/consoles/46827226/"],
   ["python-files-info34", "https://www.pythonanywhere.com/user/info34/files/home/info34"],
   ["reddit new notifications", "https://www.reddit.com/message/inbox/"],
   ["reddit new", "https://www.reddit.com"],
@@ -417,6 +419,9 @@ const array_links = [
   ["virginia assembly video", "https://vga.virginia.gov/engage/live-streaming-archives/"],
 
   ["virginia 2.0", "https://eapps.courts.state.va.us/ocis/search"],
+
+  ["virginia corporation search", "https://cis.scc.virginia.gov/EntitySearch/Index"],
+
 
 
   ["weather-forecast", "https://www.google.com/search?q=weather&rlz=1C1AJCO_enUS1195US1195&oq=weather&aqs=chrome..69i57j0i271l2.1645j0j1&sourceid=chrome&ie=UTF-8"],
@@ -618,6 +623,14 @@ function open_used(){
 
 
 document.getElementById("button_open_browse_1st").onclick = ()=> {
+  ["https://www.facebook.com/",
+   "https://www.reddit.com/message/inbox/",
+   "https://x.com/i/flow/login",
+   "https://keep.google.com/"
+   ].forEach(url=>window.open(url,'_blank'));
+}
+
+document.getElementById("button_open_browse_2st").onclick = ()=> {
   ["https://www.facebook.com/",
    "https://www.reddit.com/message/inbox/",
    "https://twitter.com/",
