@@ -1,3 +1,7 @@
+# Ignore embedded Git repositories
+info34/
+
+
 # Ignore Python bytecode files
 *.pyc
 *.pyo
