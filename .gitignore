@@ -1,0 +1,40 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.mp3
+*.epub
+*.pdf
+
+
+# Ignore the virtual environment
+.venv/
+.env/
+virtualenv/
+*.env
+
+# Ignore the cache and configuration directories
+.cache/
+.config/
+.ipython/
+.local/
+.virtualenvs/
+token/
+earnings/
+
+# Ignore sensitive files (e.g., tokens, credentials)
+token.txt
+token
+README.txt
+.git-credentials
+
+# Ignore system-specific files
+.bashrc
+.vimrc
+.profile
+.pythonstartup.py
+.lesshst
+
+# Ignore editor & IDE specific files (e.g., VSCode, PyCharm, etc.)
+.vscode/
+.idea/
+
