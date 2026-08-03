@@ -1,18 +1,23 @@
-
-import subprocess
 import os
+from git import Repo
 
-repo_dir = os.path.dirname(os.path.abspath(__file__))
+cwd = os.getcwd()
+directory_name = os.path.basename(cwd)
 
-commands = [
-    ["git", "fetch", "origin"],
-    ["git", "reset", "--hard", "origin/main"],  # Replace 'main' if your branch is different
-    ["git", "clean", "-fd"],                    # Remove untracked files/directories
-]
+# Use cwd directly since you are already inside the repo, or fix the path string
+repo_path = os.path.abspath(cwd)
+repo = Repo(repo_path)
 
-for cmd in commands:
-    print("Running:", " ".join(cmd))
-    subprocess.run(cmd, cwd=repo_dir, check=True)
+print("Fetching latest updates from remote...")
+for remote in repo.remotes:
+    remote.fetch()
 
-print("Repository is now identical to origin/main.")
-input("Press Enter to continue...")
+print("Hard resetting local files to match remote main...")
+# Replace 'main' with 'master' if your branch name differs
+repo.git.reset('--hard', 'origin/main')
+
+print("Cleaning untracked local files...")
+# -f forces removal, -d removes untracked directories
+repo.git.clean('-f', '-d')
+
+print("Your local files are now identical to the Git repository!")
