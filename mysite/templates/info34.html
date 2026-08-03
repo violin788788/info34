@@ -3,40 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    #countdown{color:white;}
+    *{font-size:20px;font-weight:bold;}
+    select{width:200px;}
+    input{width:200px;}
+    html,body{height:100%;margin:0;}
 
-  <style>
-      #sun_info {
-      color: white; /* only this div's text is white */
-    }
-    * { font-size: 20px; font-weight: bold; }
-    select {width: 200px;}
-    input {width: 200px;}
-    /*
-    background-image: url('static/fdr.png');
-    */
-    body {
+    body{background: url('/static/church.png') top left/contain repeat fixed;}
 
-      background-image: url("{{ url_for('static', filename='church.png') }}");
-
-
-        /*
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        margin: 0;
-
-      background-image: url('static/pantheon.png');
-      background-image: url('static/stock.jpeg');
-      background-repeat: repeat;
-      background-color: #f0f0f0;
-      */
-    }
-    p, h1, h2, h3, h4, h5, h6, span, a, li { background-color: white; }
-    img { width: 100px; height: auto; }
-    #div_mp3s { flex: 1; margin-right: 20px; }
-
-  </style>
+    p,h1,h2,h3,h4,h5,h6,span,a,li{background-color:white;}
+    img{width:100px;height:auto;}
+    #div_mp3s{flex:1;margin-right:20px;}
+    </style>
 
 
 </head>
@@ -226,8 +205,8 @@ ebay/amazon search
 -->
 
 
-<h2>Solstice Countdown & Sun Times</h2>
-<div id="sun_info"></div>
+<h2>Swed Election + New Year countdown</h2>
+<div id="countdown"></div>
 
 
     <h1>Select an MP3 to Play</h1>
@@ -322,23 +301,18 @@ function run_selected_search() {
 }
 
 
-
+//countdown stuff
+const countdown_month = 9;
+const countdown_day = 13;
+const countdown_year = 2026;
 const now = new Date();
-const year = now.getFullYear();
-
-// Next June 21
-let nextSolstice = new Date(year, 12, 21); // months are 0-indexed: 5 = June
-if (now > nextSolstice) {
-  nextSolstice = new Date(year + 1, 12, 21);
-}
-
+const targetDate = new Date(countdown_year, countdown_month - 1, countdown_day);
 const msPerDay = 1000 * 60 * 60 * 24;
-const daysLeft = Math.ceil((nextSolstice - now) / msPerDay);
-
-document.getElementById('sun_info').textContent =
-  `Days until June 21 (solstice) = ${daysLeft}`;
+const daysLeft = Math.ceil((targetDate - now) / msPerDay);
+document.getElementById("countdown").textContent = `days until swed election = ${daysLeft}`;
 
 
+//do a countdown to new years?
 
 function ebay_how_long_been_there() {
   const ebayUrl = document.getElementById("ebayUrl").value;
@@ -502,7 +476,7 @@ const array_links = [
   ["python0-templates-info34", "https://www.pythonanywhere.com/user/info34/files/home/info34/mysite/templates"],
   ["python1-web-info34", "https://www.pythonanywhere.com/user/info34/webapps/#tab_id_info34_pythonanywhere_com"],
 
-  ["python2-console-info34", "https://www.pythonanywhere.com/user/info34/consoles/46827226/"],
+  ["python2-console-info34", "https://www.pythonanywhere.com/user/info34/consoles/"],
   ["python3-files-info34", "https://www.pythonanywhere.com/user/info34/files/home/info34"],
 
   ["python4-login", "https://www.pythonanywhere.com/login/?next=/"],
