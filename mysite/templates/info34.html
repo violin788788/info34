@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-    #countdown{color:white;}
+    #countdown_1{color:white;}
+
     *{font-size:20px;font-weight:bold;}
     select{width:200px;}
     input{width:200px;}
@@ -205,8 +206,12 @@ ebay/amazon search
 -->
 
 
-<h2>Swed Election + New Year countdown</h2>
-<div id="countdown"></div>
+
+<div id="countdown_1"></div>
+
+<br><br>
+
+<div id="countdown_2"></div>
 
 
     <h1>Select an MP3 to Play</h1>
@@ -300,19 +305,43 @@ function run_selected_search() {
   shop_search(selectedValue);
 }
 
-
 //countdown stuff
-const countdown_month = 9;
-const countdown_day = 13;
-const countdown_year = 2026;
 const now = new Date();
-const targetDate = new Date(countdown_year, countdown_month - 1, countdown_day);
+//countdown_1 stuff
+const countdown_1_month = 9;
+const countdown_1_day = 13;
+const countdown_1_year = 2026;
+const countdown_1_targetDate = new Date(countdown_1_year, countdown_1_month - 1, countdown_1_day);
+const countdown_1_msPerDay = 1000 * 60 * 60 * 24;
+const countdown_1_daysLeft = Math.ceil((countdown_1_targetDate - now) / countdown_1_msPerDay);
+document.getElementById("countdown_1").textContent = `days until swed election = ${countdown_1_daysLeft}`;
+
+
+const countdown_2_month = 1;
+const countdown_2_day = 1;
+const countdown_2_year = 2027;
+const countdown_2_targetDate = new Date(countdown_2_year, countdown_2_month - 1, countdown_2_day);
+const countdown_2_msPerDay = 1000 * 60 * 60 * 24;
+const countdown_2_daysLeft = Math.ceil((countdown_2_targetDate - now) / countdown_2_msPerDay);
+document.getElementById("countdown_2").textContent = `days until new year = ${countdown_2_daysLeft}`;
+
+
+
+/*
+//countdown_2 stuff
+const countdown_2_month = 1;
+const countdown_2_day = 1;
+const countdown_2_year = 2027;
+const now = new Date();
+const targetDate = new Date(countdown_1_year, countdown_1_month - 1, countdown_1_day);
 const msPerDay = 1000 * 60 * 60 * 24;
 const daysLeft = Math.ceil((targetDate - now) / msPerDay);
-document.getElementById("countdown").textContent = `days until swed election = ${daysLeft}`;
+document.getElementById("countdown_2").textContent = `days until new year = ${daysLeft}`;
 
 
-//do a countdown to new years?
+*/
+
+//do a countdown_1 to new years?
 
 function ebay_how_long_been_there() {
   const ebayUrl = document.getElementById("ebayUrl").value;
@@ -424,7 +453,10 @@ const array_links = [
   ["books_txt", "https://drive.google.com/drive/folders/1n9HCVsowapizhDUAGZPGPdbxY15UJbu0"],
 
   ["clipchamp", "https://clipchamp.com/en/"],
-  ["coq10 ebay auction newly listed","https://www.ebay.com/sch/i.html?_nkw=coq10&_sacat=0&_from=R40&LH_PrefLoc=1&LH_Auction=1&_sop=10"],
+
+  ["coq10 ebay auction least to most","https://www.ebay.com/sch/i.html?_nkw=coq10&LH_Auction=1&_sop=15"],
+
+
   ["croxyproxy","https://croxyproxy.com/"],
   ["cspan archive", "https://www.c-span.org/search/?sdate=&edate=&searchtype=Videos&sort=Most+Recent+Airing&text=0&formatid%5B%5D=25"],
   ["cspan live", "https://live.house.gov/"],
@@ -463,8 +495,10 @@ const array_links = [
   ["mp3 identify", "https://www.aha-music.com/identify-songs-music-recognition-online"],
   ["mp4 to mp3 converter","https://cloudconvert.com/mp4-to-mp3"],
   ["newsmax2", "https://rumble.com/v60552h-newsmax2-live-real-news-for-real-people.html"],
-  ["pixlr editor", "https://pixlr.com/editor/"],
 
+  ["nonprofit", "https://apps.irs.gov/app/eos/"],
+
+  ["pixlr editor", "https://pixlr.com/editor/"],
 
   ["play google","https://play.google.com/store/games?device=windows&pli=1"],
 
