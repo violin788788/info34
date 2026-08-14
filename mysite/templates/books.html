@@ -3,12 +3,21 @@
 <head>
 <title>My Books</title>
 <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
 table {
     border-collapse: collapse;
+    width: 100%;
 }
 th, td {
     border: 1px solid #ccc;
     padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
 }
 td.editable {
     cursor: pointer;
@@ -24,6 +33,7 @@ input.cell-editor {
     box-sizing: border-box;
     border: 1px solid #888;
     padding: 5px;
+    font-size: inherit;
 }
 .saved {
     background-color: #d8ffd8 !important;
@@ -34,26 +44,22 @@ input.cell-editor {
 <h1>My Books</h1>
 {% if books %}
 <table>
+<thead>
 <tr>
-<th>ID</th>
-<th>Title</th>
-<th>Author</th>
-<th>Year</th>
-<th>Category</th>
-<th>Current Page</th>
-<th>Total Pages</th>
+{% for column in columns %}
+<th>{{ column }}</th>
+{% endfor %}
 </tr>
+</thead>
+<tbody>
 {% for book in books %}
 <tr>
-<td>{{ book.id }}</td>
-<td class="editable" data-id="{{ book.id }}" data-field="title">{{ book.title or '' }}</td>
-<td class="editable" data-id="{{ book.id }}" data-field="author">{{ book.author or '' }}</td>
-<td class="editable" data-id="{{ book.id }}" data-field="year">{{ book.year or '' }}</td>
-<td class="editable" data-id="{{ book.id }}" data-field="category">{{ book.category or '' }}</td>
-<td>{{ book.current_page or '' }}</td>
-<td>{{ book.total_pages or '' }}</td>
+{% for column in columns %}
+<td class="editable" data-id="{{ book['id'] }}" data-field="{{ column }}">{{ book[column] if book[column] is not none else '' }}</td>
+{% endfor %}
 </tr>
 {% endfor %}
+</tbody>
 </table>
 {% else %}
 <p>No books in the database yet.</p>
@@ -71,7 +77,10 @@ document.querySelectorAll('.editable').forEach(function(cell) {
         cell.appendChild(input);
         input.focus();
         input.select();
+        var saved = false;
         function save() {
+            if (saved) return;
+            saved = true;
             var newValue = input.value;
             fetch('/update_book', {
                 method: 'POST',
@@ -82,15 +91,35 @@ document.querySelectorAll('.editable').forEach(function(cell) {
                     value: newValue
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                cell.textContent = newValue;
-                cell.classList.remove('editing');
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
                 if (data.success) {
+                    cell.textContent = newValue;
+                    cell.classList.remove('editing');
                     cell.classList.add('saved');
-                    setTimeout(() => cell.classList.remove('saved'), 500);
+                    setTimeout(function() {
+                        cell.classList.remove('saved');
+                    }, 500);
+                } else {
+                    cell.textContent = oldValue;
+                    cell.classList.remove('editing');
+                    alert(data.error || 'Could not save the change.');
                 }
+            })
+            .catch(function(error) {
+                console.error(error);
+                cell.textContent = oldValue;
+                cell.classList.remove('editing');
+                alert('Could not save the change.');
             });
+        }
+        function cancelEdit() {
+            if (saved) return;
+            saved = true;
+            cell.textContent = oldValue;
+            cell.classList.remove('editing');
         }
         input.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
@@ -98,11 +127,13 @@ document.querySelectorAll('.editable').forEach(function(cell) {
                 save();
             }
             if (event.key === 'Escape') {
-                cell.textContent = oldValue;
-                cell.classList.remove('editing');
+                event.preventDefault();
+                cancelEdit();
             }
         });
-        input.addEventListener('blur', save);
+        input.addEventListener('blur', function() {
+            save();
+        });
     });
 });
 </script>
