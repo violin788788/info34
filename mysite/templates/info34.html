@@ -94,10 +94,10 @@
 <div id="show_channel"></div>
 
 <br>
-
-
+<!--
 <button id="button_open_browse_1st">browse 1st</button>
 <br>
+-->
 <button id="button_open_browse_2nd">browse 2nd</button>
 
 <br><br>
@@ -518,7 +518,7 @@ const array_links = [
 
   ["python4-login", "https://www.pythonanywhere.com/login/?next=/"],
 
-
+  ["reddit old notifications", "https://old.reddit.com/message/inbox/"],
   ["reddit new notifications", "https://www.reddit.com/message/inbox/"],
   ["reddit new", "https://www.reddit.com"],
   ["scholar_google", "https://scholar.google.com/"],
@@ -742,30 +742,27 @@ function open_used(){
 }
 
 
-
+/*
 document.getElementById("button_open_browse_1st").onclick = ()=> {
   [
-
    "https://docs.google.com/spreadsheets/d/1Xkx2vUOwBQxOT_iouuOGcNCV9EbjsEU58OR3Z7BJLws/edit?pli=1&gid=1723116463#gid=1723116463",
-
    "https://www.youtube.com/watch?v=mmCnQDUSO4I&list=RDmmCnQDUSO4I&start_radio=1",
-   "https://www.facebook.com/",
    "https://www.reddit.com/message/inbox/",
    "https://x.com/i/flow/login",
+   "https://www.facebook.com/",
    "https://keep.google.com/"
    ].forEach(url=>window.open(url,'_blank'));
 }
+*/
 
 document.getElementById("button_open_browse_2nd").onclick = ()=> {
   [
-
-   "https://docs.google.com/spreadsheets/d/1Xkx2vUOwBQxOT_iouuOGcNCV9EbjsEU58OR3Z7BJLws/edit?pli=1&gid=1723116463#gid=1723116463",
-
    "https://www.youtube.com/watch?v=mmCnQDUSO4I&list=RDmmCnQDUSO4I&start_radio=1",
-   "https://www.facebook.com/",
    "https://www.reddit.com/message/inbox/",
    "https://twitter.com/",
-   "https://keep.google.com/"
+   "https://www.facebook.com/",
+   "https://docs.google.com/spreadsheets/d/1Xkx2vUOwBQxOT_iouuOGcNCV9EbjsEU58OR3Z7BJLws/edit?pli=1&gid=1723116463#gid=1723116463",
+   "https://keep.google.com/",
    ].forEach(url=>window.open(url,'_blank'));
 }
 
