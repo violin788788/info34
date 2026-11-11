@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Books</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+td.editable {
+    cursor: pointer;
+}
+td.editable:hover {
+    background-color: #f0f0f0;
+}
+td.editing {
+    background-color: #fff8c4;
+}
+input.cell-editor {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #888;
+    padding: 5px;
+    font-size: inherit;
+}
+.saved {
+    background-color: #d8ffd8 !important;
+}
+</style>
+</head>
+<body>
+<h1>My Books</h1>
+{% if books %}
+<table>
+<thead>
+<tr>
+{% for column in columns %}
+<th>{{ column }}</th>
+{% endfor %}
+</tr>
+</thead>
+<tbody>
+{% for book in books %}
+<tr>
+{% for column in columns %}
+<td class="editable" data-id="{{ book['id'] }}" data-field="{{ column }}">{{ book[column] if book[column] is not none else '' }}</td>
+{% endfor %}
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p>No books in the database yet.</p>
+{% endif %}
+<script>
+document.querySelectorAll('.editable').forEach(function(cell) {
+    cell.addEventListener('click', function() {
+        if (cell.classList.contains('editing')) return;
+        cell.classList.add('editing');
+        var oldValue = cell.textContent.trim();
+        var input = document.createElement('input');
+        input.className = 'cell-editor';
+        input.value = oldValue;
+        cell.textContent = '';
+        cell.appendChild(input);
+        input.focus();
+        input.select();
+        var saved = false;
+        function save() {
+            if (saved) return;
+            saved = true;
+            var newValue = input.value;
+            fetch('/update_book', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    id: cell.dataset.id,
+                    field: cell.dataset.field,
+                    value: newValue
+                })
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.success) {
+                    cell.textContent = newValue;
+                    cell.classList.remove('editing');
+                    cell.classList.add('saved');
+                    setTimeout(function() {
+                        cell.classList.remove('saved');
+                    }, 500);
+                } else {
+                    cell.textContent = oldValue;
+                    cell.classList.remove('editing');
+                    alert(data.error || 'Could not save the change.');
+                }
+            })
+            .catch(function(error) {
+                console.error(error);
+                cell.textContent = oldValue;
+                cell.classList.remove('editing');
+                alert('Could not save the change.');
+            });
+        }
+        function cancelEdit() {
+            if (saved) return;
+            saved = true;
+            cell.textContent = oldValue;
+            cell.classList.remove('editing');
+        }
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                save();
+            }
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                cancelEdit();
+            }
+        });
+        input.addEventListener('blur', function() {
+            save();
+        });
+    });
+});
+</script>
+</body>
+</html>
