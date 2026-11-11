@@ -318,40 +318,25 @@ function run_selected_search() {
 //countdown stuff
 const now = new Date();
 //countdown_1 stuff
-const countdown_1_month = 9;
-const countdown_1_day = 13;
+const countdown_1_name = "solstice"
 const countdown_1_year = 2026;
+const countdown_1_month = 12;
+const countdown_1_day = 21;
 const countdown_1_targetDate = new Date(countdown_1_year, countdown_1_month - 1, countdown_1_day);
 const countdown_1_msPerDay = 1000 * 60 * 60 * 24;
 const countdown_1_daysLeft = Math.ceil((countdown_1_targetDate - now) / countdown_1_msPerDay);
-document.getElementById("countdown_1").textContent = `countdown_1`;
+document.getElementById("countdown_1").textContent = "days left till "+countdown_1_name+" = "+countdown_1_daysLeft;
 
-
-const countdown_2_month = 1;
-const countdown_2_day = 1;
-const countdown_2_year = 2027;
+//countdown_2 stuff
+const countdown_2_name = "presidential election"
+const countdown_2_year = 2028;
+const countdown_2_month = 11;
+const countdown_2_day = 07;
 const countdown_2_targetDate = new Date(countdown_2_year, countdown_2_month - 1, countdown_2_day);
 const countdown_2_msPerDay = 1000 * 60 * 60 * 24;
 const countdown_2_daysLeft = Math.ceil((countdown_2_targetDate - now) / countdown_2_msPerDay);
-document.getElementById("countdown_2").textContent = `countdown_2`;
+document.getElementById("countdown_2").textContent = "days left till "+countdown_2_name+" = "+countdown_2_daysLeft;
 
-
-
-/*
-//countdown_2 stuff
-const countdown_2_month = 1;
-const countdown_2_day = 1;
-const countdown_2_year = 2027;
-const now = new Date();
-const targetDate = new Date(countdown_1_year, countdown_1_month - 1, countdown_1_day);
-const msPerDay = 1000 * 60 * 60 * 24;
-const daysLeft = Math.ceil((targetDate - now) / msPerDay);
-document.getElementById("countdown_2").textContent = `days until new year = ${daysLeft}`;
-
-
-*/
-
-//do a countdown_1 to new years?
 
 function ebay_how_long_been_there() {
   const ebayUrl = document.getElementById("ebayUrl").value;

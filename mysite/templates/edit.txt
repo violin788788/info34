@@ -1,0 +1,10 @@
+const now = new Date();
+//countdown_2 stuff
+const countdown_2_name = "solstice"
+const countdown_2_year = 2026;
+const countdown_2_month = 12;
+const countdown_2_day = 21;
+const countdown_2_targetDate = new Date(countdown_2_year, countdown_2_month - 1, countdown_2_day);
+const countdown_2_msPerDay = 1000 * 60 * 60 * 24;
+const countdown_2_daysLeft = Math.ceil((countdown_2_targetDate - now) / countdown_2_msPerDay);
+document.getElementById("countdown_2").textContent = "days left till "+countdown_2_name+" = "+countdown_2_daysLeft;

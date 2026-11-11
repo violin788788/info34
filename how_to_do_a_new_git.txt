@@ -8,7 +8,7 @@ paste code in lines below and click enter, it will ask for username and token (t
 
 git init
 git checkout -b main
-git remote add origin https://github.com/violin788788/info34.git"
+git remote add origin https://github.com/violin788788/info34.git
 git add -A
 
 git config --global user.name "Your Name"
