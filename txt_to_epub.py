@@ -47,12 +47,11 @@ def create_epub_from_txt(txt_path, epub_path, cover_image_path, title, author, w
     print(f"Success! Saved EPUB with {len(chapters)} chapters to: {epub_path}")
 if __name__ == "__main__":
 
-    txt_path="keynes.txt"
-    title="How to Pay for the War"
-    author="John Maynard Keynes"
-    cover_image_path="keynes.png"
+    txt_path="fed.txt"
+    title="The ABC of the Federal Reserve System"
+    author="Edwin Kremmer"
+    cover_image_path="fed.png"
     words_per_chapter=9677
-
     epub_path=title+"-"+author+".epub"
 
     create_epub_from_txt(title=title,author=author,cover_image_path=cover_image_path,txt_path=txt_path,epub_path=title+"-"+author+".epub",words_per_chapter=words_per_chapter)

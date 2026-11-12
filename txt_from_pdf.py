@@ -11,9 +11,9 @@ def pdf_to_txt(pdf_path):
   txt_path = pdf_path.rsplit(".", 1)[0] + ".txt"
   with open(txt_path, "w", encoding="utf-8") as f:
     f.write(text)
-  print ("created text file of ", pdf_path)
+  print ("created",txt_path,"of", pdf_path)
 
 
-file = "federal_reserve.pdf"
+file = "fed.pdf"
 
 pdf_to_txt(file)
